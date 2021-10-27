@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import SwiftUI
+import UserNotifications
 
 class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
@@ -80,8 +82,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
             case "show":
                 // the user tapped our "show more info…" button
-                return AnyView(CKTaskViewController(tasks: TaskSamples.sampleSurveyTask))
-
+                //return AnyView(CKTaskViewController(tasks: TaskSamples.sampleSurveyTask))
+                break
+                
             default:
                 break
             }
