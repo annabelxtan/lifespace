@@ -35,11 +35,11 @@ class HealthKitData: Object, Mappable, Codable {
     
     @objc dynamic var passiveWhenCollected : Bool = false
     
-    required convenience init?(map: ObjectMapper.Map) {
+    required convenience init?(map: Map) {
         self.init()
     }
     
-    func mapping(map: ObjectMapper.Map) {
+    func mapping(map: Map) {
         startDate <- map["start_date"]
         endDate <- map["end_date"]
         date <- map["date"]
