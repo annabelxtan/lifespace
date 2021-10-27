@@ -1,0 +1,15 @@
+use_frameworks!
+
+target 'CardinalKit_Example' do
+  pod 'CardinalKit', :path => '../'
+  
+  # CK Sample Pods
+  pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
+  
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/DynamicLinks'
+
+end
