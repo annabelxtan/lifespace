@@ -1,17 +1,6 @@
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
-.DS_store
-*librealm-monorepo.a
-CardinalKit-Example/Pods/*
-CardinalKit-Example/Pods/Realm/core/*
-CardinalKit-Example/Pods/Realm/core/realm-monorepo.xcframework/ios-armv7_arm64/*
-CardinalKit-Example/Pods/Realm/core/realm-monorepo.xcframework/tvos-arm64_x86_64-simulator/*
-CardinalKit-Example/Pods/Realm/core/realm-monorepo.xcframework/ios-arm64_x86_64_i386-simulator/librealm-monorepo.a
-CardinalKit-Example/Pods/Realm/core/realm-monorepo.xcframework/watchos-armv7k_arm64_32/librealm-monorepo.a
-CardinalKit-Example/Pods/Realm/core/realm-monorepo.xcframework/ios-armv7_arm64/librealm-monorepo.a
-
-
 
 ## User settings
 xcuserdata/
@@ -65,7 +54,7 @@ playground.xcworkspace
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-# Pods/
+CardinalKit-Example/Pods/
 #
 # Add this line if you want to avoid checking in source code from the Xcode workspace
 # *.xcworkspace
