@@ -12,6 +12,7 @@
 		2B19DD9426FE1D2600649CE1 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9326FE1D2600649CE1 /* TestViewController.swift */; };
 		2B19DD9626FE1D2F00649CE1 /* CheckListItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */; };
 		2B5D63FB274F5861008AA129 /* ShowMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D63FA274F585F008AA129 /* ShowMap.swift */; };
+		2BA6821327518F41005BA2A4 /* GradientLine.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2BA68212275189EC005BA2A4 /* GradientLine.geojson */; };
 		2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* TaskItem.swift */; };
 		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -102,6 +103,7 @@
 		2B19DD9526FE1D2F00649CE1 /* CheckListItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListItemViewController.swift; sourceTree = "<group>"; };
 		2B5D63FA274F585F008AA129 /* ShowMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMap.swift; sourceTree = "<group>"; };
 		2B5D63FC274F62DE008AA129 /* MapboxMaps.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapboxMaps.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BA68212275189EC005BA2A4 /* GradientLine.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = GradientLine.geojson; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CkResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		607FACD21AFB9204008FA782 /* CardinalKit-Example */ = {
 			isa = PBXGroup;
 			children = (
+				2BA68212275189EC005BA2A4 /* GradientLine.geojson */,
 				8E0A4383244A4A0400656518 /* Supporting Files */,
 				8E9CDEAA25916F2A00C8A228 /* Components */,
 				8E0A43C5244A4A5700656518 /* Library */,
@@ -583,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
+				2BA6821327518F41005BA2A4 /* GradientLine.geojson in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
 				4F02D9852748861800F203B5 /* GoogleService-Info.plist in Resources */,
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
