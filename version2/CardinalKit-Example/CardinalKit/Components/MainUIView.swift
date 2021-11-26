@@ -48,6 +48,11 @@ struct MainUIView: View {
                 Image("tab_profile").renderingMode(.template)
                 Text("Profile")
             }
+            
+            MapViewWrapper().tabItem {
+                Image("tab_profile").renderingMode(.template)
+                Text("Mapbox")
+            }
         }
         .accentColor(self.color)
         .onAppear(perform: {
