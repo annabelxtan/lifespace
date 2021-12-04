@@ -15,6 +15,7 @@ struct MainUIView: View {
     
     @State var useCareKit = false
     @State var carekitLoaded = false
+    @ObservedObject var locationFetcher = LocationFetcher()
     
     init() {
         self.color = Color(config.readColor(query: "Primary Color"))

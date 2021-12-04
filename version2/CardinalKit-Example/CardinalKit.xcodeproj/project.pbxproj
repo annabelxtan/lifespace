@@ -15,6 +15,7 @@
 		2BA6821327518F41005BA2A4 /* GradientLine.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2BA68212275189EC005BA2A4 /* GradientLine.geojson */; };
 		2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* TaskItem.swift */; };
+		2BF3E57C275ACA9400639233 /* JHMapDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3E57B275ACA9400639233 /* JHMapDataManager.swift */; };
 		2BF6451826C1D0040020C206 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
@@ -106,6 +107,7 @@
 		2BA68212275189EC005BA2A4 /* GradientLine.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = GradientLine.geojson; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CkResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		2BF3E57B275ACA9400639233 /* JHMapDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHMapDataManager.swift; sourceTree = "<group>"; };
 		2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CK_ORKSerialization.swift; sourceTree = "<group>"; };
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		3C547BEF3DCA919DD22A2179 /* Pods-CardinalKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CardinalKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CardinalKit_Example/Pods-CardinalKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 				2B5D63FA274F585F008AA129 /* ShowMap.swift */,
 			);
 			path = Mapbox;
+			sourceTree = "<group>";
+		};
+		2BF3E57A275ACA7A00639233 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				2BF3E57B275ACA9400639233 /* JHMapDataManager.swift */,
+			);
+			path = Maps;
 			sourceTree = "<group>";
 		};
 		2C45A885E8BD0CAC5349997A /* Frameworks */ = {
@@ -353,6 +363,7 @@
 		8E0A43C5244A4A5700656518 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				2BF3E57A275ACA7A00639233 /* Maps */,
 				8E9CDF802591E6B800C8A228 /* Configuration */,
 				8E9CDECE2591ABDF00C8A228 /* HealthKit */,
 				8E40DC022471E5590027536B /* Networking */,
@@ -736,6 +747,7 @@
 				8EA664232592E57200B6A45A /* SensorsDemoUIView.swift in Sources */,
 				4F02D97B274871C300F203B5 /* LocationFetcher.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
+				2BF3E57C275ACA9400639233 /* JHMapDataManager.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
 				8E6E1E1C253528D70024B8DF /* ReportView.swift in Sources */,
 				8E6E1E26253537E40024B8DF /* TasksUIView.swift in Sources */,
@@ -907,7 +919,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AP9CR2A4SB;
+				DEVELOPMENT_TEAM = UX98524U82;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -916,7 +928,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.odden.jhsapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alternova.jackson;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -933,7 +945,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AP9CR2A4SB;
+				DEVELOPMENT_TEAM = UX98524U82;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -942,7 +954,7 @@
 				);
 				MARKETING_VERSION = 1.3.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.odden.jhsapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alternova.jackson;
 				PRODUCT_NAME = "CardinalKit Example";
 				SWIFT_OBJC_BRIDGING_HEADER = "CardinalKit/Supporting Files/CardinalKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
