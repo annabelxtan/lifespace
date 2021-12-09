@@ -381,6 +381,7 @@ PODS:
   - nanopb/encode (2.30908.0)
   - ObjectiveSugar (1.1.0)
   - ObjectMapper (3.3.0)
+  - OneSignalXCFramework (3.8.1)
   - PromisesObjC (1.2.12)
   - ReachabilitySwift (3)
   - Realm (10.7.2):
@@ -403,6 +404,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Granola (from `https://github.com/Alternova-Inc/Granola.git`, branch `Main`)
   - MapboxMaps (= 10.1.0)
+  - OneSignalXCFramework (< 4.0, >= 3.0.0)
   - ResearchKit (from `https://github.com/ResearchKit/ResearchKit.git`, branch `master`)
 
 SPEC REPOS:
@@ -432,6 +434,7 @@ SPEC REPOS:
     - nanopb
     - ObjectiveSugar
     - ObjectMapper
+    - OneSignalXCFramework
     - PromisesObjC
     - ReachabilitySwift
     - Realm
@@ -487,6 +490,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  OneSignalXCFramework: cd6290d43d4f7dd0443d34e7be8b95996417644e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: e523da9ade306c5ae87e85dc09fdef148d3e1cc1
@@ -497,6 +501,6 @@ SPEC CHECKSUMS:
   Turf: d1220730a00b50a9fb5862c1fb6a5dd698c9e367
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 10be4eb9f2a60f2ce8e5be84020b482883051de8
+PODFILE CHECKSUM: b559234849680c6e36f50d059eaa980b5556992a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

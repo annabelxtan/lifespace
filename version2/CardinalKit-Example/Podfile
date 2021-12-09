@@ -7,6 +7,8 @@ target 'CardinalKit_Example' do
   pod 'ResearchKit', :git => 'https://github.com/ResearchKit/ResearchKit.git', :branch => 'master'
   pod 'Granola', :git => 'https://github.com/Alternova-Inc/Granola.git', :branch => 'Main'
   
+  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
@@ -15,4 +17,9 @@ target 'CardinalKit_Example' do
   
   pod 'MapboxMaps', '10.1.0'
 
+end
+
+target 'OneSignalNotificationServiceExtension' do
+  use_frameworks!
+  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
 end

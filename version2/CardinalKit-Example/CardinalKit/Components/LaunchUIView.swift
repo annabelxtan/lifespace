@@ -15,6 +15,7 @@ import Firebase
 struct LaunchUIView: View {
     
     @State var didCompleteOnboarding = false
+    @ObservedObject var surveyData: LaunchModel = LaunchModel.sharedinstance
     
     init() {
         
@@ -22,7 +23,10 @@ struct LaunchUIView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
+            if surveyData.showSurvey {
+                AnyView(CKTaskViewController(tasks: DailySurveyTask()))
+            }
+            else if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
                 MainUIView()
             } else {
                 OnboardingUIView() {
@@ -50,5 +54,17 @@ struct LaunchUIView: View {
 struct LaunchUIView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchUIView()
+    }
+}
+
+
+class LaunchModel: ObservableObject{
+    static let sharedinstance = LaunchModel()
+    @Published var showSurvey:Bool = false
+    @Published var surveyId:String = ""
+    
+    init(){
+        showSurvey = false
+        surveyId = ""
     }
 }

@@ -40,7 +40,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             }
             
             
-            if d>0.5{
+            if d>0.1{
                 let db = Firestore.firestore()
                 db.collection(authCollection! + "location-data")
                     .document(UUID().uuidString)
@@ -57,10 +57,11 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
                         print("[CKSendHelper] sendToFirestoreWithUUID() - document successfully written!")
                     }
                 }
+                lastLatitude = latitude
+                lastLongitude = longitude
             }
             
-            lastLatitude = latitude
-            lastLongitude = longitude
+            
         }
     }
 
