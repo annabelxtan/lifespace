@@ -83,7 +83,7 @@ public class JHMapQuestionStepViewController: ORKQuestionStepViewController, Loc
                 self.mapView.mapboxMap.setCamera(
                     to: CameraOptions(
                         center: allLocations[0],
-                        zoom: 15.0
+                        zoom: 18.0
                     )
                 )
 

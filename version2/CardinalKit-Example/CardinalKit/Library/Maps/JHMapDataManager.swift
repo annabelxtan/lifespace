@@ -25,9 +25,11 @@ class JHMapDataManager: NSObject{
         
         var allPoints = [mapPoint]()
         
-        CKActivityManager.shared.fetchData(route: mapPointPath, onCompletion: {(results) in
+        
+        
+        
+        CKActivityManager.shared.fetchFilteredData(route: mapPointPath, child: "currentdate", date: Date(), onCompletion: {(results) in
             if let results = results as? [String:Any]{
-                var counter = results.count
                 for (_, item) in results{
                     if let item = item as? [String:Any]{
                         if let latitude = item["latitude"] as? Double,
@@ -38,8 +40,22 @@ class JHMapDataManager: NSObject{
                 }
             }
             onCompletion(allPoints)
-            
         })
+        // get points all days
+//        CKActivityManager.shared.fetchData(route: mapPointPath, onCompletion: {(results) in
+//            if let results = results as? [String:Any]{
+//                for (_, item) in results{
+//                    if let item = item as? [String:Any]{
+//                        if let latitude = item["latitude"] as? Double,
+//                           let longitude = item["longitude"] as? Double{
+//                            allPoints.append(mapPoint(latitude: latitude, longitude: longitude))
+//                        }
+//                    }
+//                }
+//            }
+//            onCompletion(allPoints)
+//
+//        })
     }
     
 }

@@ -64,7 +64,7 @@ class ShowMap: UIViewController, LocationPermissionsDelegate {
                 self.mapView.mapboxMap.setCamera(
                     to: CameraOptions(
                         center: allLocations[0],
-                        zoom: 9.0
+                        zoom: 18.0
                     )
                 )
 

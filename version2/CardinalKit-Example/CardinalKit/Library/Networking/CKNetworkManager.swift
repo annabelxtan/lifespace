@@ -50,6 +50,47 @@ class CKAppNetworkManager: CKAPIDeliveryDelegate, CKAPIReceiverDelegate {
         }
     }
     
+    func requestFilter(route: String, child: String, date:Date, onCompletion: @escaping (Any)->Void){
+        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMMM d, yyyy HH:mm:ss"
+
+//        let startTime: Date = formatter.date(from: date) ?? Date(timeIntervalSince1970: 0)
+        let startTime = date.startOfDay
+        let startTimestamp: Timestamp = Timestamp(date: startTime)
+
+//        let endTime: Date = formatter.date(from: date) ?? Date()
+        let endTime = date.endOfDay!
+        let endTimestamp: Timestamp = Timestamp(date: endTime)
+        
+        var objResult = [String:Any]()
+        let db=firestoreDb()
+        db.collection(route)
+            .whereField("\(child)", isGreaterThanOrEqualTo: startTimestamp)
+            .whereField("\(child)", isLessThanOrEqualTo: endTimestamp)
+            .order(by: "\(child)").getDocuments(){
+                (querySnapshot, err) in
+                if let err = err{
+                    print("error \(err)")
+                }
+                else{
+                    for document in querySnapshot!.documents {
+                        objResult[document.documentID]=document.data()
+                    }
+                    onCompletion(objResult)
+                }
+            }
+//        db.collection(route).queryOrderedByChild("\(child)").queryStartingAtValue(valueStart).queryEndingAtValue(valueEnd).getDocuments(){
+//            (querySnapshot, err) in
+//            if let err = err{
+//                print("error \(err)")
+//            }
+//            else{
+//                print("filtered \(querySnapshot)" )
+//            }
+//        }
+    }
+    
     private func firestoreDb()->Firestore{
         let settings = FirestoreSettings()
         settings.isPersistenceEnabled = false

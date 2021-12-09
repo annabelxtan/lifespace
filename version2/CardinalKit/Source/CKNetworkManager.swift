@@ -19,6 +19,7 @@ public protocol CKAPIDeliveryDelegate {
 
 public protocol CKAPIReceiverDelegate {
     func request(route: String, onCompletion: @escaping (Any) -> Void)
+    func requestFilter(route: String, child: String, date:Date, onCompletion: @escaping (Any)->Void)
 }
 
 public class CKNetworkManager : NSObject {
