@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           })
         
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-            LaunchModel.sharedinstance.showSurvey = true
+            LaunchModel.sharedinstance.showSurveyAfterPasscode = true
             // This block gets called when the user reacts to a notification received
 //            let notification: OSNotification = result.notification
 //                    

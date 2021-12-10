@@ -23,11 +23,14 @@ struct LaunchUIView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            if surveyData.showSurvey {
-                AnyView(CKTaskViewController(tasks: DailySurveyTask()))
-            }
-            else if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
-                MainUIView()
+           
+            if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
+                if surveyData.showSurvey {
+                    AnyView(CKTaskViewController(tasks: DailySurveyTask()))
+                }
+                else{
+                    MainUIView()
+                }
             } else {
                 OnboardingUIView() {
                     //on complete
@@ -61,10 +64,9 @@ struct LaunchUIView_Previews: PreviewProvider {
 class LaunchModel: ObservableObject{
     static let sharedinstance = LaunchModel()
     @Published var showSurvey:Bool = false
-    @Published var surveyId:String = ""
-    
+    @Published var showSurveyAfterPasscode:Bool = false
     init(){
         showSurvey = false
-        surveyId = ""
+        showSurveyAfterPasscode = true
     }
 }
