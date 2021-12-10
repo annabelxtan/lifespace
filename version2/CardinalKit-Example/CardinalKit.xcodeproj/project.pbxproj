@@ -28,6 +28,7 @@
 		4F02D97B274871C300F203B5 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D97A274871C300F203B5 /* LocationFetcher.swift */; };
 		4F02D97D274871C800F203B5 /* NotificationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D97C274871C800F203B5 /* NotificationFetcher.swift */; };
 		4F02D9852748861800F203B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F02D9842748861800F203B5 /* GoogleService-Info.plist */; };
+		73B406962762F22B0092B75A /* PermissionLocationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B406952762F22B0092B75A /* PermissionLocationUIView.swift */; };
 		8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4382244A4A0400656518 /* CKStudyUser.swift */; };
 		8E0A43AD244A4A0400656518 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4384244A4A0400656518 /* Constants.swift */; };
 		8E0A43AE244A4A0400656518 /* ORKESerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0A4386244A4A0400656518 /* ORKESerialization.m */; };
@@ -153,6 +154,7 @@
 		607FACD01AFB9204008FA782 /* CardinalKit Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CardinalKit Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6968D7D05F928BB9D62AB8E3 /* Pods_CardinalKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CardinalKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73B406952762F22B0092B75A /* PermissionLocationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionLocationUIView.swift; sourceTree = "<group>"; };
 		7D90456E969160A072CE4BFE /* Pods_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		897FE740F3335F125DE7C925 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0A4378244A4A0300656518 /* CardinalKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CardinalKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				8E7FFFB725DE350A002982B4 /* CoffeeUIView.swift */,
 				8E7FFFBA25DE37FF002982B4 /* CoffeePieChartView.swift */,
 				27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */,
+				73B406952762F22B0092B75A /* PermissionLocationUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				8EA6648725930B6B00B6A45A /* CKHealthRecordsStepViewController.swift in Sources */,
 				8E0A43C0244A4A0400656518 /* PasswordlessLoginStep.swift in Sources */,
 				8EA664B2259422E400B6A45A /* CKCareKitRemoteSyncWithFirestore.swift in Sources */,
+				73B406962762F22B0092B75A /* PermissionLocationUIView.swift in Sources */,
 				8EA664AD2593380D00B6A45A /* SendRecordsView.swift in Sources */,
 				8E6E1E28253538CC0024B8DF /* TaskListItemView.swift in Sources */,
 				8E0A43B3244A4A0400656518 /* TaskSamples.swift in Sources */,

@@ -74,8 +74,6 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
 
     func start() {
-        manager.requestWhenInUseAuthorization()
-        manager.requestAlwaysAuthorization()
         if CLLocationManager.locationServicesEnabled(){
             self.manager.startUpdatingLocation()
             self.manager.startMonitoringSignificantLocationChanges()
@@ -83,6 +81,10 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
 
+    func requestAuthorizationLocation(){
+        manager.requestWhenInUseAuthorization()
+        manager.requestAlwaysAuthorization()
+    }
     
     func stop(){
         manager.stopUpdatingLocation()
