@@ -14,19 +14,19 @@ import MapboxCoreMaps_Private
 import MapboxCoreMaps
 import MapboxMaps
 
-
-struct MapViewWrapper : UIViewControllerRepresentable {
-    
-    typealias UIViewControllerType = ShowMap
-        
-    func makeUIViewController(context: Context) -> ShowMap {
-        return ShowMap()
-    }
-    
-    func updateUIViewController(_ uiViewController: ShowMap, context: Context) {
-        
-    }
-}
+//
+//struct MapViewWrapper : UIViewControllerRepresentable {
+//    
+//    typealias UIViewControllerType = ShowMap
+//        
+//    func makeUIViewController(context: Context) -> ShowMap {
+//        return ShowMap()
+//    }
+//    
+//    func updateUIViewController(_ uiViewController: ShowMap, context: Context) {
+//        
+//    }
+//}
 
 class ShowMap: UIViewController, LocationPermissionsDelegate {
     let museumLayerId = "museum-circle-layer"

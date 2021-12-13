@@ -16,6 +16,7 @@
 		2B8201572760ECD0000223A6 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2B8201502760ECD0000223A6 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2B82015E2761121E000223A6 /* dailySurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B82015D2761121E000223A6 /* dailySurveyViewController.swift */; };
 		2B82016027611967000223A6 /* JHMapQuestionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B82015F27611967000223A6 /* JHMapQuestionStep.swift */; };
+		2B94F5AC2763FF1900EA8D2C /* MapMangerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F5AB2763FF1900EA8D2C /* MapMangerView.swift */; };
 		2BA6821327518F41005BA2A4 /* GradientLine.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2BA68212275189EC005BA2A4 /* GradientLine.geojson */; };
 		2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* TaskItem.swift */; };
@@ -139,6 +140,7 @@
 		2B82015C2760F228000223A6 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		2B82015D2761121E000223A6 /* dailySurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dailySurveyViewController.swift; sourceTree = "<group>"; };
 		2B82015F27611967000223A6 /* JHMapQuestionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHMapQuestionStep.swift; sourceTree = "<group>"; };
+		2B94F5AB2763FF1900EA8D2C /* MapMangerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMangerView.swift; sourceTree = "<group>"; };
 		2BA68212275189EC005BA2A4 /* GradientLine.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = GradientLine.geojson; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CkResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				2B5D63FA274F585F008AA129 /* ShowMap.swift */,
+				2B94F5AB2763FF1900EA8D2C /* MapMangerView.swift */,
 			);
 			path = Mapbox;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				8E6E1E16253524500024B8DF /* WithdrawalViewController.swift in Sources */,
 				E2680B1B260A72DD00B755EA /* LoginExistingUserViewController.swift in Sources */,
 				8E6E1E2A2535398D0024B8DF /* HelpView.swift in Sources */,
+				2B94F5AC2763FF1900EA8D2C /* MapMangerView.swift in Sources */,
 				8E9CDED02591AC4A00C8A228 /* CKHealthKitManager.swift in Sources */,
 				8E0A43C2244A4A0400656518 /* ConsentDocument.swift in Sources */,
 				2B82016027611967000223A6 /* JHMapQuestionStep.swift in Sources */,

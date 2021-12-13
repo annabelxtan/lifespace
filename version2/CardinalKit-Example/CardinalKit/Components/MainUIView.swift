@@ -24,10 +24,14 @@ struct MainUIView: View {
     
     var body: some View {
         TabView {
-            TasksUIView(color: self.color).tabItem {
-                Image("tab_tasks").renderingMode(.template)
-                Text("Tasks")
+            MapManagerViewWrapper().tabItem {
+                Image("tab_profile").renderingMode(.template)
+                Text("Home")
             }
+//            TasksUIView(color: self.color).tabItem {
+//                Image("tab_tasks").renderingMode(.template)
+//                Text("Tasks")
+//            }
             
             if useCareKit && carekitLoaded {
                 ScheduleViewControllerRepresentable()
@@ -50,10 +54,10 @@ struct MainUIView: View {
                 Text("Profile")
             }
             
-            MapViewWrapper().tabItem {
-                Image("tab_profile").renderingMode(.template)
-                Text("Mapbox")
-            }
+//            MapViewWrapper().tabItem {
+//                Image("tab_profile").renderingMode(.template)
+//                Text("Mapbox")
+//            }
         }
         .accentColor(self.color)
         .onAppear(perform: {

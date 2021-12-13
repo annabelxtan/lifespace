@@ -15,7 +15,7 @@ import Firebase
 struct LaunchUIView: View {
     
     @State var didCompleteOnboarding = false
-    @ObservedObject var surveyData: LaunchModel = LaunchModel.sharedinstance
+    @ObservedObject var launchData: LaunchModel = LaunchModel.sharedinstance
     
     init() {
         
@@ -25,8 +25,11 @@ struct LaunchUIView: View {
         VStack(spacing: 10) {
            
             if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
-                if surveyData.showSurvey {
+                if launchData.showSurvey {
                     AnyView(CKTaskViewController(tasks: DailySurveyTask()))
+                }
+                else if launchData.showPermissionView{
+                    PermissionLocationUIView()
                 }
                 else{
                     MainUIView()
@@ -40,6 +43,11 @@ struct LaunchUIView: View {
                 }
             }
         }.onAppear(perform: {
+            // put here code and change var launchData.showSurvey
+            // Example
+            // launchData.showSurvey = alidate authorizarion
+            
+            
             if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
                self.didCompleteOnboarding = completed
             }
@@ -65,8 +73,10 @@ class LaunchModel: ObservableObject{
     static let sharedinstance = LaunchModel()
     @Published var showSurvey:Bool = false
     @Published var showSurveyAfterPasscode:Bool = false
+    @Published var showPermissionView:Bool = false
     init(){
         showSurvey = false
-        showSurveyAfterPasscode = true
+        showSurveyAfterPasscode = false
+        showPermissionView = false
     }
 }
