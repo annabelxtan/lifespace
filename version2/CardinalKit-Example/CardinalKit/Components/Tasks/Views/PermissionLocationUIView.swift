@@ -30,7 +30,13 @@ struct PermissionLocationUIView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
-            Text("In order to improve the collection of the location system, it is necessary that the corresponding permissions are given. You will then need to authorize as follows")
+            Text("To ensure the collection of the information, it is necessary to authorize the use of the location for the application")
+                .multilineTextAlignment(.leading)
+                .font(.system(size: 18, weight: .bold, design: .default))
+                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
+            
+            Text("Step one: when you click on the button a window will appear in which you must select Allow While Using App.")
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 18, weight: .regular, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
@@ -42,12 +48,16 @@ struct PermissionLocationUIView: View {
                 Spacer()
                 Button(action: {
                     locationFetcher.requestAuthorizationLocation()
+                    if(!locationFetcher.validateAuthorizationLocation()){
+                      //  locationFetcher.messageWhenValidateAuthorizationLocationFail()
+                    }
+                    
                 }, label: {
                      Text("Step One")
                         .padding(Metrics.PADDING_BUTTON_LABEL)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(self.color)
-                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .font(.system(size: 18, weight: .bold, design: .default))
                         .overlay(
                                     RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
                                         .stroke(self.color, lineWidth: 2)
@@ -60,16 +70,26 @@ struct PermissionLocationUIView: View {
             }
  
             //Spacer()
-            Text("Instruction for step two")
+            Text("Step two: click on the button and a window will appear where you must select Change to Always Allow.")
                 .multilineTextAlignment(.leading)
                 .font(.system(size: 18, weight: .regular, design: .default))
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
             
             HStack {
+                
                 Spacer()
                 Button(action: {
+                    
                     locationFetcher.requestAuthorizationLocation()
+                    if(locationFetcher.validateAuthorizationLocation()){
+                        LaunchModel.sharedinstance.showPermissionView = true
+                        locationFetcher.start()
+                    }
+                    else{
+                        //locationFetcher.messageWhenValidateAuthorizationLocationFail()
+                    }
+                    
                 }, label: {
                      Text("Step Two")
                         .padding(Metrics.PADDING_BUTTON_LABEL)

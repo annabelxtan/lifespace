@@ -68,8 +68,8 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     override init() {
         super.init()
         manager.delegate = self
-        self.manager.startUpdatingLocation()
-        self.manager.startMonitoringSignificantLocationChanges()
+        //self.manager.startUpdatingLocation()
+        //self.manager.startMonitoringSignificantLocationChanges()
         self.manager.allowsBackgroundLocationUpdates = true
     }
 
@@ -80,8 +80,55 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             self.manager.allowsBackgroundLocationUpdates = true
         }
     }
+    
+    func validateAuthorizationLocation() -> Bool{
+        
+        switch (manager.authorizationStatus) {
+            case .authorizedAlways:
+                // Handle case
+                print("Always")
+                return true
+            case .authorizedWhenInUse:
+                // Handle case
+                print("When in use")
+                return true
+            case .denied, .restricted, .notDetermined:
+                // Handle case
+                print("Denied")
 
-    func requestAuthorizationLocation(){
+                return false
+        }
+        
+    }
+    
+    func messageWhenValidateAuthorizationLocationFail(){
+        
+        // initialise a pop up for using later
+        let alertController = UIAlertController(title: "You have selected the wrong permit", message: "Please go to the localization settings and select ALWAYS", preferredStyle: .alert)
+
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+             }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        
+         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true) {
+         
+             //self.start()
+             //LaunchModel.sharedinstance.showPermissionView = true
+             
+         }
+    }
+
+    func requestAuthorizationLocation() {
         manager.requestWhenInUseAuthorization()
         manager.requestAlwaysAuthorization()
     }

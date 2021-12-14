@@ -61,7 +61,7 @@ struct MainUIView: View {
         }
         .accentColor(self.color)
         .onAppear(perform: {
-            self.locationFetcher.start()
+            //self.locationFetcher.start()
             self.useCareKit = config.readBool(query: "Use CareKit")
             
             let lastUpdateDate:Date? = UserDefaults.standard.object(forKey: Constants.prefCareKitCoreDataInitDate) as? Date
