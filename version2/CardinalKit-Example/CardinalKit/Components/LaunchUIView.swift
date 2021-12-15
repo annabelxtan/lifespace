@@ -16,7 +16,7 @@ struct LaunchUIView: View {
     
     @State var didCompleteOnboarding = false
     @ObservedObject var launchData: LaunchModel = LaunchModel.sharedinstance
-    @ObservedObject var locationFetcher = LocationFetcher()
+    @ObservedObject var locationFetcher = LocationFetcher.sharedinstance
     
     init() {
         
@@ -29,7 +29,7 @@ struct LaunchUIView: View {
                 if launchData.showSurvey {
                     AnyView(CKTaskViewController(tasks: DailySurveyTask()))
                 }
-                else if !launchData.showPermissionView{
+                else if launchData.showPermissionView{
                     PermissionLocationUIView()
                 }
                 else{
@@ -47,7 +47,7 @@ struct LaunchUIView: View {
             // put here code and change var launchData.showSurvey
             // Example
             //launchData.showPermissionView = locationFetcher.validateAuthorizationLocation()
-            
+            launchData.showPermissionView = !locationFetcher.userAuthorizeAlways()
             
             
             

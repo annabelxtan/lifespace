@@ -10,12 +10,18 @@ import Firebase
 import Foundation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
+    
+    static let sharedinstance = LocationFetcher()
+    
     let manager = CLLocationManager()
     let date = NSDate()
     let unixtime = NSTimeIntervalSince1970
     let authCollection = CKStudyUser.shared.authCollection
     var lastLatitude:CLLocationDegrees = 0.0
     var lastLongitude:CLLocationDegrees = 0.0
+    
+    @Published var authorizationStatus:CLAuthorizationStatus = CLLocationManager().authorizationStatus
+    @Published var canShowRequestMessage:Bool = true
     
     @Published var lastKnownLocation: CLLocationCoordinate2D? {
         didSet {
@@ -42,23 +48,26 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             
             if d>0.1{
                 let db = Firestore.firestore()
-                db.collection(authCollection! + "location-data")
-                    .document(UUID().uuidString)
-                    .setData([
-                                "currentdate": date,
-                                "epoch time (seconds)": unixtime,
-                                "latitude": latitude,
-                                "longitude": longitude
-                    ]) { err in
-                    
-                    if let err = err {
-                        print("[CKSendHelper] sendToFirestoreWithUUID() - error writing document: \(err)")
-                    } else {
-                        print("[CKSendHelper] sendToFirestoreWithUUID() - document successfully written!")
+                if let authCollection = authCollection {
+                    db.collection(authCollection + "location-data")
+                        .document(UUID().uuidString)
+                        .setData([
+                                    "currentdate": date,
+                                    "epoch time (seconds)": unixtime,
+                                    "latitude": latitude,
+                                    "longitude": longitude
+                        ]) { err in
+                        
+                        if let err = err {
+                            print("[CKSendHelper] sendToFirestoreWithUUID() - error writing document: \(err)")
+                        } else {
+                            print("[CKSendHelper] sendToFirestoreWithUUID() - document successfully written!")
+                        }
                     }
+                    lastLatitude = latitude
+                    lastLongitude = longitude
                 }
-                lastLatitude = latitude
-                lastLongitude = longitude
+                
             }
             
             
@@ -71,6 +80,17 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         //self.manager.startUpdatingLocation()
         //self.manager.startMonitoringSignificantLocationChanges()
         self.manager.allowsBackgroundLocationUpdates = true
+        calculeIfCanShowRequestMessage()
+        
+    }
+    
+    func calculeIfCanShowRequestMessage(){
+        if manager.authorizationStatus == .notDetermined || (manager.authorizationStatus == .authorizedWhenInUse && UserDefaults.standard.bool(forKey: Constants.JHFirstLocationRequest)){
+            canShowRequestMessage = true
+        }
+        else{
+            canShowRequestMessage = false
+        }
     }
 
     func start() {
@@ -101,6 +121,15 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         
     }
     
+    func userAuthorizeAlways() -> Bool {
+        return manager.authorizationStatus == .authorizedAlways
+    }
+    
+    func userAuthorizeWhenInUse() -> Bool {
+        return manager.authorizationStatus == .authorizedWhenInUse
+    }
+    
+    
     func messageWhenValidateAuthorizationLocationFail(){
         
         // initialise a pop up for using later
@@ -129,8 +158,16 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
 
     func requestAuthorizationLocation() {
-        manager.requestWhenInUseAuthorization()
-        manager.requestAlwaysAuthorization()
+//        messageWhenValidateAuthorizationLocationFail()
+//        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .denied{
+//            messageWhenValidateAuthorizationLocationFail()
+//        }
+//        else if manager.authorizationStatus == .notDetermined{
+            manager.requestWhenInUseAuthorization()
+            manager.requestAlwaysAuthorization()
+//        }
+        
+        
     }
     
     func stop(){
@@ -141,7 +178,27 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         lastKnownLocation = locations.first?.coordinate
     }
         
-    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let previousState = authorizationStatus
+        authorizationStatus = manager.authorizationStatus
+        
+        let first = UserDefaults.standard.bool(forKey: Constants.JHFirstLocationRequest)
+        
+        if(authorizationStatus == .authorizedWhenInUse && !first && previousState != authorizationStatus){
+            UserDefaults.standard.set(true, forKey: Constants.JHFirstLocationRequest)
+        }
+        else{
+            UserDefaults.standard.set(false, forKey: Constants.JHFirstLocationRequest)
+        }
+        
+        if authorizationStatus == .authorizedAlways{
+            LaunchModel.sharedinstance.showPermissionView = false
+            start()
+        }
+        
+        calculeIfCanShowRequestMessage()
+        
+    }
 }
 
 

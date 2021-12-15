@@ -78,12 +78,15 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
 
               // Add the layer to the mapView
                 try self.mapView.mapboxMap.style.addLayer(heatLayer)
-                self.mapView.mapboxMap.setCamera(
-                    to: CameraOptions(
-                        center: allLocations[0],
-                        zoom: 18.0
+                if !allLocations.isEmpty {
+                    self.mapView.mapboxMap.setCamera(
+                        to: CameraOptions(
+                            center: allLocations[0],
+                            zoom: 18.0
+                        )
                     )
-                )
+                }
+                
             } catch {
               print("error adding source or layer: \(error)")
             }

@@ -13,7 +13,7 @@ struct PermissionLocationUIView: View {
     let color: Color
     let config = CKPropertyReader(file: "CKConfiguration")
     
-    @ObservedObject var locationFetcher = LocationFetcher()
+    @ObservedObject var locationFetcher = LocationFetcher.sharedinstance
     
     init(onComplete: (() -> Void)? = nil) {
         
@@ -36,78 +36,119 @@ struct PermissionLocationUIView: View {
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
             
-            Text("Step one: when you click on the button a window will appear in which you must select Allow While Using App.")
-                .multilineTextAlignment(.leading)
-                .font(.system(size: 18, weight: .regular, design: .default))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
-            
-            //Spacer()
-            
-            HStack {
-                Spacer()
-                Button(action: {
-                    locationFetcher.requestAuthorizationLocation()
-                    if(!locationFetcher.validateAuthorizationLocation()){
-                      //  locationFetcher.messageWhenValidateAuthorizationLocationFail()
-                    }
+            if locationFetcher.canShowRequestMessage {
+                if locationFetcher.authorizationStatus == .authorizedWhenInUse{
+                    //Spacer()
+                    Text("click on the button and a window will appear where you must select Change to Always Allow.")
+                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 18, weight: .regular, design: .default))
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
                     
-                }, label: {
-                     Text("Step One")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(self.color)
-                        .font(.system(size: 18, weight: .bold, design: .default))
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                        .stroke(self.color, lineWidth: 2)
-                            )
-                })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-        
-                Spacer()
-            }
- 
-            //Spacer()
-            Text("Step two: click on the button and a window will appear where you must select Change to Always Allow.")
-                .multilineTextAlignment(.leading)
-                .font(.system(size: 18, weight: .regular, design: .default))
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
-            
-            HStack {
-                
-                Spacer()
-                Button(action: {
-                    
-                    locationFetcher.requestAuthorizationLocation()
-                    if(locationFetcher.validateAuthorizationLocation()){
-                        LaunchModel.sharedinstance.showPermissionView = true
-                        locationFetcher.start()
-                    }
-                    else{
-                        //locationFetcher.messageWhenValidateAuthorizationLocationFail()
-                    }
-                    
-                }, label: {
-                     Text("Step Two")
-                        .padding(Metrics.PADDING_BUTTON_LABEL)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(self.color)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
-                                        .stroke(self.color, lineWidth: 2)
-                            )
+                    HStack {
+                        
+                        Spacer()
+                        Button(action: {
+                            
+                            locationFetcher.requestAuthorizationLocation()
+                            UserDefaults.standard.set(false, forKey: Constants.JHFirstLocationRequest)
+                            locationFetcher.calculeIfCanShowRequestMessage()
+                            
+                        }, label: {
+                             Text("Step Two")
+                                .padding(Metrics.PADDING_BUTTON_LABEL)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(self.color)
+                                .font(.system(size: 20, weight: .bold, design: .default))
+                                .overlay(
+                                            RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                                .stroke(self.color, lineWidth: 2)
+                                    )
 
-                })
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
-        
-                Spacer()
+                        })
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                
+                        Spacer()
+                    }
+                    Image("secondTime")
+                }
+                else{
+                    Text("when you click on the button a window will appear in which you must select Allow While Using App.")
+                        .multilineTextAlignment(.leading)
+                        .font(.system(size: 18, weight: .regular, design: .default))
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            locationFetcher.requestAuthorizationLocation()
+                            
+                        }, label: {
+                             Text("Step One")
+                                .padding(Metrics.PADDING_BUTTON_LABEL)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(self.color)
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                                .overlay(
+                                            RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                                .stroke(self.color, lineWidth: 2)
+                                    )
+                        })
+                        .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                
+                        Spacer()
+                    }
+                    Image("firstTime")
+                }
+                
+            }
+            else{
+                Text("Please go to the localization settings and select ALWAYS")
+                    .multilineTextAlignment(.leading)
+                    .font(.system(size: 18, weight: .regular, design: .default))
+                    .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                    .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*2)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
+                         }
+                    }, label: {
+                        Text("Allow")
+                            .padding(Metrics.PADDING_BUTTON_LABEL)
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(self.color)
+                            .font(.system(size: 18, weight: .bold, design: .default))
+                            .overlay(
+                                        RoundedRectangle(cornerRadius: Metrics.RADIUS_CORNER_BUTTON)
+                                            .stroke(self.color, lineWidth: 2)
+                                )
+                    }).padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN)
+                        .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN)
+                
+                        Spacer()
+                    
+                }
+                    Image("external1")
+                    Image("external2")
+                
             }
             
+//            Text("\(locationFetcher.authorizationStatus.rawValue)")
+//            
+//            if locationFetcher.authorizationStatus != .authorizedWhenInUse && locationFetcher.authorizationStatus != .authorizedAlways{
+//               
+//            }
+//            else if (locationFetcher.authorizationStatus == .authorizedWhenInUse){
+//                
+//            }
             Spacer()
             
             Image("SBDLogoGrey")
