@@ -10,15 +10,22 @@ import Firebase
 import Foundation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
+    var statusDidChange: ((Bool) -> Void)? = nil
     
     static let sharedinstance = LocationFetcher()
     
     let manager = CLLocationManager()
     let date = NSDate()
     let unixtime = NSTimeIntervalSince1970
-    let authCollection = CKStudyUser.shared.authCollection
+//    let authCollection = CKStudyUser.shared.authCollection
     var lastLatitude:CLLocationDegrees = 0.0
     var lastLongitude:CLLocationDegrees = 0.0
+    @Published var tracking:Bool = false{
+        didSet{
+            statusDidChange?(tracking)
+        }
+    }
+    
     
     @Published var authorizationStatus:CLAuthorizationStatus = CLLocationManager().authorizationStatus
     @Published var canShowRequestMessage:Bool = true
@@ -44,11 +51,15 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
                 let c = 2 * atan2(sqrt(a), sqrt(1-a));
                 d = 6367 * c;
             }
+//            else{
+//                lastLatitude = latitude
+//                lastLongitude = longitude
+//            }
             
             
             if d>0.1{
                 let db = Firestore.firestore()
-                if let authCollection = authCollection {
+                if let authCollection = CKStudyUser.shared.authCollection {
                     db.collection(authCollection + "location-data")
                         .document(UUID().uuidString)
                         .setData([
@@ -63,10 +74,10 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
                         } else {
                             print("[CKSendHelper] sendToFirestoreWithUUID() - document successfully written!")
                         }
-                    }
-                    lastLatitude = latitude
-                    lastLongitude = longitude
+                    }                    
                 }
+                lastLatitude = latitude
+                lastLongitude = longitude
                 
             }
             
@@ -98,6 +109,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             self.manager.startUpdatingLocation()
             self.manager.startMonitoringSignificantLocationChanges()
             self.manager.allowsBackgroundLocationUpdates = true
+            self.tracking = true
         }
     }
     
@@ -171,6 +183,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func stop(){
+        self.tracking = false
         manager.stopUpdatingLocation()
     }
 

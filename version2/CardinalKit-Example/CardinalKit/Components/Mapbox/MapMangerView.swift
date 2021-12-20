@@ -28,7 +28,6 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
     
     internal var mapView: MapView!
     var trackingButton:UIButton?=nil
-    var tracking = false
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,7 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
         let button = UIButton(frame: CGRect(x: 200, y: 35, width: 350, height: 50))
         button.center.x = view.center.x
         
-        if tracking{
+        if LocationFetcher.sharedinstance.tracking{
             button.setTitle("stop", for: .normal)
             button.backgroundColor = .systemRed
         }
@@ -45,13 +44,24 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
             button.backgroundColor = .systemBlue
         }
         
-        
         button.setTitleColor(.white,for: .normal)
         button.addTarget(self,action: #selector(startStopTracking),for: .touchUpInside)
         button.layer.cornerRadius = 10
        
         trackingButton = button
         self.view.addSubview(trackingButton!)
+        
+        
+        LocationFetcher.sharedinstance.statusDidChange = { tracking in
+            if tracking{
+                self.trackingButton?.setTitle("stop", for: .normal)
+                self.trackingButton?.backgroundColor = .systemRed
+            }
+            else{
+                self.trackingButton?.setTitle("start", for: .normal)
+                self.trackingButton?.backgroundColor = .systemBlue
+            }
+        }
         
         
         let myResourceOptions = ResourceOptions(accessToken: "sk.eyJ1IjoicG9sbG93ZjgiLCJhIjoiY2t3ZWRlZW1xMDNtNDJ2cHdzdGE2NGs5ZiJ9.g8IODwKuRVo9a6kAlyyIYQ")
@@ -81,7 +91,7 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
                 if !allLocations.isEmpty {
                     self.mapView.mapboxMap.setCamera(
                         to: CameraOptions(
-                            center: allLocations[0],
+                            center: LocationFetcher.sharedinstance.lastKnownLocation,
                             zoom: 18.0
                         )
                     )
@@ -91,21 +101,27 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
               print("error adding source or layer: \(error)")
             }
         })
+        
+        
     }
     
     @objc
     func startStopTracking(){
-        tracking = !tracking
-        if tracking{
-            trackingButton?.setTitle("stop", for: .normal)
-            trackingButton?.backgroundColor = .systemRed
+        
+        if LocationFetcher.sharedinstance.tracking{
+            LocationFetcher.sharedinstance.stop()
+//            trackingButton?.setTitle("stop", for: .normal)
+//            trackingButton?.backgroundColor = .systemRed
         }
         else{
-            trackingButton?.setTitle("start", for: .normal)
-            trackingButton?.backgroundColor = .systemBlue
+            LocationFetcher.sharedinstance.start()
+//            trackingButton?.setTitle("start", for: .normal)
+//            trackingButton?.backgroundColor = .systemBlue
         }
         
     }
+    
+    
     
     internal func decodeGeoJSON(from fileName: String) throws -> FeatureCollection? {
         guard let path = Bundle.main.path(forResource: fileName, ofType: "geojson") else {
@@ -124,65 +140,65 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
      
     internal func setupExample() {
      
-     
-    // Attempt to decode GeoJSON from file bundled with application.
-    guard let featureCollection = try? decodeGeoJSON(from: "GradientLine") else { return }
-    let geoJSONDataSourceIdentifier = "geoJSON-data-source"
-     
-    // Create a GeoJSON data source.
-    var geoJSONSource = GeoJSONSource()
-    geoJSONSource.data = .featureCollection(featureCollection!)
-    geoJSONSource.lineMetrics = true // MUST be `true` in order to use `lineGradient` expression
-     
-    // Create a line layer
-    var lineLayer = LineLayer(id: "line-layer")
-    lineLayer.filter = Exp(.eq) {
-    "$type"
-    "LineString"
-    }
-     
-    // Setting the source
-    lineLayer.source = geoJSONDataSourceIdentifier
-     
-    // Styling the line
-    lineLayer.lineColor = .constant(StyleColor(.red))
-    lineLayer.lineGradient = .expression(
-    Exp(.interpolate) {
-    Exp(.linear)
-    Exp(.lineProgress)
-    0
-    UIColor.blue
-    0.1
-    UIColor.purple
-    0.3
-    UIColor.cyan
-    0.5
-    UIColor.green
-    0.7
-    UIColor.yellow
-    1
-    UIColor.red
-    }
-    )
-     
-    let lowZoomWidth = 10
-    let highZoomWidth = 20
-    lineLayer.lineWidth = .expression(
-    Exp(.interpolate) {
-    Exp(.linear)
-    Exp(.zoom)
-    14
-    lowZoomWidth
-    18
-    highZoomWidth
-    }
-    )
-    lineLayer.lineCap = .constant(.round)
-    lineLayer.lineJoin = .constant(.round)
-     
-    // Add the source and style layer to the map style.
-    try! mapView.mapboxMap.style.addSource(geoJSONSource, id: geoJSONDataSourceIdentifier)
-    try! mapView.mapboxMap.style.addLayer(lineLayer, layerPosition: nil)
+         
+        // Attempt to decode GeoJSON from file bundled with application.
+        guard let featureCollection = try? decodeGeoJSON(from: "GradientLine") else { return }
+        let geoJSONDataSourceIdentifier = "geoJSON-data-source"
+         
+        // Create a GeoJSON data source.
+        var geoJSONSource = GeoJSONSource()
+        geoJSONSource.data = .featureCollection(featureCollection!)
+        geoJSONSource.lineMetrics = true // MUST be `true` in order to use `lineGradient` expression
+         
+        // Create a line layer
+        var lineLayer = LineLayer(id: "line-layer")
+        lineLayer.filter = Exp(.eq) {
+            "$type"
+            "LineString"
+        }
+         
+        // Setting the source
+        lineLayer.source = geoJSONDataSourceIdentifier
+         
+        // Styling the line
+        lineLayer.lineColor = .constant(StyleColor(.red))
+        lineLayer.lineGradient = .expression(
+            Exp(.interpolate) {
+                Exp(.linear)
+                Exp(.lineProgress)
+                0
+                UIColor.blue
+                0.1
+                UIColor.purple
+                0.3
+                UIColor.cyan
+                0.5
+                UIColor.green
+                0.7
+                UIColor.yellow
+                1
+                UIColor.red
+            }
+        )
+         
+        let lowZoomWidth = 10
+        let highZoomWidth = 20
+        lineLayer.lineWidth = .expression(
+        Exp(.interpolate) {
+            Exp(.linear)
+            Exp(.zoom)
+            14
+            lowZoomWidth
+            18
+            highZoomWidth
+        }
+        )
+        lineLayer.lineCap = .constant(.round)
+        lineLayer.lineJoin = .constant(.round)
+         
+        // Add the source and style layer to the map style.
+        try! mapView.mapboxMap.style.addSource(geoJSONSource, id: geoJSONDataSourceIdentifier)
+        try! mapView.mapboxMap.style.addLayer(lineLayer, layerPosition: nil)
     }
     
     // Selector that will be called as a result of the delegate below
