@@ -98,11 +98,11 @@
 		<key>Overview</key>
 		<dict>
 			<key>Title</key>
-			<string>Hi there! 👋🏽</string>
+			<string>Welcome.👋🏽</string>
 			<key>Summary</key>
 			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
 			<key>Content</key>
-			<string>CardinalKit is a suite of tools designed to help you build a digital health app experience from the ground up. It integrates with Firebase to provide full-stack solutions. We hope you enjoy the love poured into this sample and make many great things with it!</string>
+			<string>By clicking continue you are agreeing to Jackson Heart Terms &amp; Conditions and Privacy Policy</string>
 		</dict>
 		<key>DataGathering</key>
 		<dict>

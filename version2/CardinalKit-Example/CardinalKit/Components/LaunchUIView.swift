@@ -27,9 +27,10 @@ struct LaunchUIView: View {
            
             if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
                 if launchData.showSurvey {
-                    AnyView(CKTaskViewController(tasks: DailySurveyTask()))
+                    DailyViewStartButton()
                 }
-                else if launchData.showPermissionView{
+                else
+                    if launchData.showPermissionView{
                     PermissionLocationUIView()
                 }
                 else{
