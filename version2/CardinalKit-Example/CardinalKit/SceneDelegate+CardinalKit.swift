@@ -38,7 +38,7 @@ extension SceneDelegate: ORKPasscodeDelegate {
         
         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
         passcodeViewController.isModalInPresentation = true
-        
+        window?.rootViewController?.dismiss(animated: false, completion: nil)
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
