@@ -69,6 +69,7 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
         mapView = MapView(frame:CGRect(x: 0, y: 120, width: 480, height: 480), mapInitOptions: myMapInitOptions)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(mapView)
+        mapView.location.options.puckType = .puck2D()
         var allLocations = [CLLocationCoordinate2D]()
         // get firebase points
         JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
@@ -92,7 +93,7 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
                     self.mapView.mapboxMap.setCamera(
                         to: CameraOptions(
                             center: LocationFetcher.sharedinstance.lastKnownLocation,
-                            zoom: 18.0
+                            zoom: 10.0
                         )
                     )
                 }
