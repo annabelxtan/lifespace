@@ -18,6 +18,7 @@
 		2B82016027611967000223A6 /* JHMapQuestionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B82015F27611967000223A6 /* JHMapQuestionStep.swift */; };
 		2B94F5AC2763FF1900EA8D2C /* MapMangerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B94F5AB2763FF1900EA8D2C /* MapMangerView.swift */; };
 		2BA6821327518F41005BA2A4 /* GradientLine.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2BA68212275189EC005BA2A4 /* GradientLine.geojson */; };
+		2BC7CC0D27B584530026F042 /* DailyViewStartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC7CC0C27B584530026F042 /* DailyViewStartButton.swift */; };
 		2BD5328326C2CC4E00C4636E /* CkResearchSurveysManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */; };
 		2BD5328526C30F2E00C4636E /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5328426C30F2E00C4636E /* TaskItem.swift */; };
 		2BF3E57C275ACA9400639233 /* JHMapDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF3E57B275ACA9400639233 /* JHMapDataManager.swift */; };
@@ -142,6 +143,7 @@
 		2B82015F27611967000223A6 /* JHMapQuestionStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHMapQuestionStep.swift; sourceTree = "<group>"; };
 		2B94F5AB2763FF1900EA8D2C /* MapMangerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMangerView.swift; sourceTree = "<group>"; };
 		2BA68212275189EC005BA2A4 /* GradientLine.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = GradientLine.geojson; sourceTree = "<group>"; };
+		2BC7CC0C27B584530026F042 /* DailyViewStartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewStartButton.swift; sourceTree = "<group>"; };
 		2BD5328226C2CC4E00C4636E /* CkResearchSurveysManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CkResearchSurveysManager.swift; sourceTree = "<group>"; };
 		2BD5328426C30F2E00C4636E /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		2BF3E57B275ACA9400639233 /* JHMapDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JHMapDataManager.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 				8EA664AF25941A4D00B6A45A /* SurveyItemViewController.swift */,
 				2B82015D2761121E000223A6 /* dailySurveyViewController.swift */,
 				2B82015F27611967000223A6 /* JHMapQuestionStep.swift */,
+				2BC7CC0C27B584530026F042 /* DailyViewStartButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				8E9CDEAF259172C200C8A228 /* CKCareKitManager+Sample.swift in Sources */,
 				8E9CDEA925916E6600C8A228 /* ScheduleViewController.swift in Sources */,
 				2BD5328526C30F2E00C4636E /* TaskItem.swift in Sources */,
+				2BC7CC0D27B584530026F042 /* DailyViewStartButton.swift in Sources */,
 				D253D132250D1BDB00A363E4 /* CKSignInWithAppleStep.swift in Sources */,
 				8E6E1E0D25351D8F0024B8DF /* PageViewController.swift in Sources */,
 				8E0A43AC244A4A0400656518 /* CKStudyUser.swift in Sources */,
@@ -968,7 +972,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = UX98524U82;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1010,7 +1014,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = UX98524U82;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1142,7 +1146,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = UX98524U82;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1170,7 +1174,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "CardinalKit-Example.entitlements";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = UX98524U82;
 				INFOPLIST_FILE = "CardinalKit/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
