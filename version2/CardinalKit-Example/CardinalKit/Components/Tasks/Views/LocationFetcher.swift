@@ -20,6 +20,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
 //    let authCollection = CKStudyUser.shared.authCollection
     var lastLatitude:CLLocationDegrees = 0.0
     var lastLongitude:CLLocationDegrees = 0.0
+    var lastDate = Date()
     @Published var tracking:Bool = false{
         didSet{
             statusDidChange?(tracking)
@@ -57,7 +58,8 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
 //            }
             
             
-            if d>0.1{
+            if d>0.1  || lastDate.startOfDay != Date().startOfDay{
+                lastDate = Date()
                 let db = Firestore.firestore()
                 if let authCollection = CKStudyUser.shared.authCollection {
                     db.collection(authCollection + "location-data")
@@ -87,12 +89,12 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
 
     override init() {
         super.init()
+        lastDate = lastDate.addingTimeInterval(-10)
         manager.delegate = self
         //self.manager.startUpdatingLocation()
         //self.manager.startMonitoringSignificantLocationChanges()
         self.manager.allowsBackgroundLocationUpdates = true
         calculeIfCanShowRequestMessage()
-        
     }
     
     func calculeIfCanShowRequestMessage(){
