@@ -163,7 +163,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
         
-         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true) {
+         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: false) {
          
              //self.start()
              //LaunchModel.sharedinstance.showPermissionView = true

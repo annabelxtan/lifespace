@@ -33,7 +33,7 @@ class CKUploadToGCPTaskViewControllerDelegate : NSObject, ORKTaskViewControllerD
             }
             fallthrough
         default:
-            taskViewController.dismiss(animated: true, completion: nil)
+            taskViewController.dismiss(animated: false, completion: nil)
             
         }
     }
