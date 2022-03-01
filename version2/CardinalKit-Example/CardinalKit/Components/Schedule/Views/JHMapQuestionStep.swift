@@ -82,7 +82,7 @@ public class JHMapQuestionStepViewController: ORKQuestionStepViewController, Loc
                 try self.mapView.mapboxMap.style.addLayer(heatLayer)
                 self.mapView.mapboxMap.setCamera(
                     to: CameraOptions(
-                        center: allLocations[0],
+                        center: LocationFetcher.sharedinstance.lastKnownLocation,
                         zoom: 18.0
                     )
                 )
