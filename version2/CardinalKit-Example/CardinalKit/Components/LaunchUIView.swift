@@ -15,6 +15,8 @@ import Firebase
 struct LaunchUIView: View {
     
     @State var didCompleteOnboarding = false
+    @ObservedObject var launchData: LaunchModel = LaunchModel.sharedinstance
+    @ObservedObject var locationFetcher = LocationFetcher.sharedinstance
     
     init() {
         
@@ -22,8 +24,18 @@ struct LaunchUIView: View {
 
     var body: some View {
         VStack(spacing: 10) {
+           
             if didCompleteOnboarding && (CKStudyUser.shared.currentUser != nil){
-                MainUIView()
+                if launchData.showSurvey {
+                    DailyViewStartButton()
+                }
+                else
+                    if launchData.showPermissionView{
+                    PermissionLocationUIView()
+                }
+                else{
+                    MainUIView()
+                }
             } else {
                 OnboardingUIView() {
                     //on complete
@@ -33,6 +45,13 @@ struct LaunchUIView: View {
                 }
             }
         }.onAppear(perform: {
+            // put here code and change var launchData.showSurvey
+            // Example
+            //launchData.showPermissionView = locationFetcher.validateAuthorizationLocation()
+            launchData.showPermissionView = !locationFetcher.userAuthorizeAlways()
+            
+            
+            
             if let completed = UserDefaults.standard.object(forKey: Constants.onboardingDidComplete) as? Bool {
                self.didCompleteOnboarding = completed
             }
@@ -50,5 +69,18 @@ struct LaunchUIView: View {
 struct LaunchUIView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchUIView()
+    }
+}
+
+
+class LaunchModel: ObservableObject{
+    static let sharedinstance = LaunchModel()
+    @Published var showSurvey:Bool = false
+    @Published var showSurveyAfterPasscode:Bool = false
+    @Published var showPermissionView:Bool = false
+    init(){
+        showSurvey = false
+        showSurveyAfterPasscode = false
+        showPermissionView = false
     }
 }

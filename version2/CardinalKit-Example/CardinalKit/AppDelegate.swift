@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import ResearchKit
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +38,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
+        
+        
+        // OneSignal initialization
+          OneSignal.initWithLaunchOptions(launchOptions)
+          OneSignal.setAppId("81ed674d-365f-47db-986c-ad6d40b977de")
+          
+          // promptForPushNotifications will show the native iOS notification permission prompt.
+          // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
+          OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+          })
+        
+        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+            LaunchModel.sharedinstance.showSurveyAfterPasscode = true
+            // This block gets called when the user reacts to a notification received
+//            let notification: OSNotification = result.notification
+//                    
+//            if let additionalData = notification.additionalData {
+//                print("additionalData: ", additionalData)
+//                
+//                if let aditionalData = additionalData as? [String:Any]{
+//                    if let survey = aditionalData["surveyId"] as? String{
+//                        LaunchModel.sharedinstance.surveyId = survey
+//                        
+//                    }
+//                }
+//            }
+        }
+        
+        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
         
         return true
     }

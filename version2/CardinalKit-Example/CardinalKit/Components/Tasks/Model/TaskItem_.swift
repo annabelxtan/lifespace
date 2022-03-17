@@ -17,7 +17,7 @@ enum LocalTaskItem: Int {
      * Give each item a recognizable name!
      */
     case sampleResearchKitSurvey,
-         sampleLocation,
+//         sampleLocation,
          sampleLearnItem
          
     /*
@@ -26,8 +26,8 @@ enum LocalTaskItem: Int {
      */
     var title: String {
         switch self {
-        case .sampleLocation:
-            return "Location"
+//        case .sampleLocation:
+//            return "Location"
         case .sampleResearchKitSurvey:
             return "Survey (ResearchKit)"
         case .sampleLearnItem:
@@ -40,8 +40,8 @@ enum LocalTaskItem: Int {
      */
     var subtitle: String {
         switch self {
-        case .sampleLocation:
-            return "Track your location"
+//        case .sampleLocation:
+//            return "Track your location"
         case .sampleResearchKitSurvey:
             return "Daily Survey"
         case .sampleLearnItem:
@@ -56,8 +56,8 @@ enum LocalTaskItem: Int {
      */
     var image: UIImage? {
         switch self {
-        case .sampleLocation:
-             return getImage(named: "ActivityIcon")
+//        case .sampleLocation:
+//             return getImage(named: "ActivityIcon")
         case .sampleLearnItem:
             return getImage(named: "CKLogoIcon")
         default:
@@ -70,7 +70,8 @@ enum LocalTaskItem: Int {
      */
     var section: String {
         switch self {
-        case .sampleResearchKitSurvey, .sampleLocation:
+        case .sampleResearchKitSurvey:
+//                .sampleLocation:
             return "Current Tasks"
         case .sampleLearnItem:
             return "Learn"
@@ -85,8 +86,8 @@ enum LocalTaskItem: Int {
         switch self {
         case .sampleResearchKitSurvey:
             return AnyView(CKTaskViewController(tasks: TaskSamples.sampleSurveyTask))
-        case .sampleLocation:
-            return AnyView(LocationView())
+//        case .sampleLocation:
+//            return AnyView(LocationView())
         case .sampleLearnItem:
             return AnyView(LearnUIView())
         }

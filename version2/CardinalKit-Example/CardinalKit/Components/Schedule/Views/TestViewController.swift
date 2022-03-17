@@ -36,7 +36,7 @@ class TestViewController: OCKSimpleTaskViewController, ORKTaskViewControllerDele
 
     // 3b. This method will be called when the user completes the survey.
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        taskViewController.dismiss(animated: true, completion: nil)
+        taskViewController.dismiss(animated: false, completion: nil)
         guard reason == .completed else {
             taskView.completionButton.isSelected = false
             return

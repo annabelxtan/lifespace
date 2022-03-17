@@ -38,7 +38,7 @@ extension SceneDelegate: ORKPasscodeDelegate {
         
         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: config.read(query: "Passcode On Return Text"), delegate: self)
         passcodeViewController.isModalInPresentation = true
-        
+        window?.rootViewController?.dismiss(animated: false, completion: nil)
         window?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
@@ -53,9 +53,13 @@ extension SceneDelegate: ORKPasscodeDelegate {
     }
     
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
+        if(LaunchModel.sharedinstance.showSurveyAfterPasscode){
+            LaunchModel.sharedinstance.showSurveyAfterPasscode = false
+            LaunchModel.sharedinstance.showSurvey = true
+        }
         // dismiss passcode prompt screen
         toggleContainer(hidden: false)
-        viewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: false, completion: nil)
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
