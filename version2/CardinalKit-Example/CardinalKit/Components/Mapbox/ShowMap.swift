@@ -41,38 +41,8 @@ class ShowMap: UIViewController, LocationPermissionsDelegate {
         mapView = MapView(frame: view.bounds, mapInitOptions: myMapInitOptions)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        self.view.addSubview(mapView)
-        var allLocations = [CLLocationCoordinate2D]()
-        // get firebase points
-        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
-            if let results = results as? [mapPoint]{
-                for point in results{
-                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-                    allLocations.append(location)
-                }
-            }
-            do {
-              // Make the GeoJSON source
-              var source = GeoJSONSource()
-                source.data = .feature(Feature(geometry: .lineString(LineString(allLocations))))
-                try self.mapView.mapboxMap.style.addSource(source, id: "SOURCE_ID")
-              var heatLayer = HeatmapLayer(id: "LAYER_ID")
-                heatLayer.source = "SOURCE_ID"
-
-              // Add the layer to the mapView
-                try self.mapView.mapboxMap.style.addLayer(heatLayer)
-                self.mapView.mapboxMap.setCamera(
-                    to: CameraOptions(
-                        center: LocationFetcher.sharedinstance.lastKnownLocation,
-                        zoom: 14.0
-                    )
-                )
-
-
-            } catch {
-              print("error adding source or layer: \(error)")
-            }
-        })
+//        self.view.addSubview(mapView)
+//        MapboxMap.initialiceMap(mapView: mapView)
     }
     
     internal func decodeGeoJSON(from fileName: String) throws -> FeatureCollection? {

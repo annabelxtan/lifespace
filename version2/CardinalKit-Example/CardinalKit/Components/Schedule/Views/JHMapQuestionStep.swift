@@ -60,38 +60,46 @@ public class JHMapQuestionStepViewController: ORKQuestionStepViewController, Loc
         
         self.view.backgroundColor = .white
         
-        
-        var allLocations = [CLLocationCoordinate2D]()
-        // get firebase points
-        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
-            if let results = results as? [mapPoint]{
-                for point in results{
-                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-                    allLocations.append(location)
-                }
-            }
-            do {
-              // Make the GeoJSON source
-              var source = GeoJSONSource()
-                source.data = .feature(Feature(geometry: .lineString(LineString(allLocations))))
-                try self.mapView.mapboxMap.style.addSource(source, id: "SOURCE_ID")
-              var heatLayer = HeatmapLayer(id: "LAYER_ID")
-                heatLayer.source = "SOURCE_ID"
-
-              // Add the layer to the mapView
-                try self.mapView.mapboxMap.style.addLayer(heatLayer)
-                self.mapView.mapboxMap.setCamera(
-                    to: CameraOptions(
-                        center: LocationFetcher.sharedinstance.lastKnownLocation,
-                        zoom: 14.0
-                    )
-                )
-
-
-            } catch {
-              print("error adding source or layer: \(error)")
-            }
-        })
+//
+//        var allLocations = [CLLocationCoordinate2D]()
+//        // get firebase points
+//        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
+//            if let results = results as? [mapPoint]{
+//                for point in results{
+//                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+//                    allLocations.append(location)
+//                }
+//            }
+//            do {
+//              // Make the GeoJSON source
+//              var source = GeoJSONSource()
+//                source.data = .feature(Feature(geometry: .lineString(LineString(allLocations))))
+//                try self.mapView.mapboxMap.style.addSource(source, id: "SOURCE_ID")
+//
+//                var circlesLayer = CircleLayer(id: "LAYER_ID")
+//                circlesLayer.source =  "SOURCE_ID"
+////                circlesLayer.circleColor =  StyleColor.init(.red)
+//                circlesLayer.circleColor = .constant(StyleColor.init(.red))
+//                circlesLayer.circleStrokeColor = .constant(StyleColor.init(.black))
+//                circlesLayer.circleStrokeWidth = .constant(2)
+////              var heatLayer = HeatmapLayer(id: "LAYER_ID")
+////                heatLayer.source = "SOURCE_ID"
+//
+//              // Add the layer to the mapView
+//                try self.mapView.mapboxMap.style.addLayer(circlesLayer)
+//                self.mapView.mapboxMap.setCamera(
+//                    to: CameraOptions(
+//                        center: LocationFetcher.sharedinstance.lastKnownLocation,
+//                        zoom: 14.0
+//                    )
+//                )
+//
+//
+//            } catch {
+//              print("error adding source or layer: \(error)")
+//            }
+//        })
+        MapboxMap.initialiceMap(mapView: mapView)
         
         
     }

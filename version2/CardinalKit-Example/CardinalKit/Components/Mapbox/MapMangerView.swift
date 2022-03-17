@@ -69,40 +69,43 @@ class MapManagerView: UIViewController, LocationPermissionsDelegate {
         mapView = MapView(frame:CGRect(x: 0, y: 120, width: 480, height: 480), mapInitOptions: myMapInitOptions)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(mapView)
-        mapView.location.options.puckType = .puck2D()
-        var allLocations = [CLLocationCoordinate2D]()
-        // get firebase points
-        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
-            if let results = results as? [mapPoint]{
-                for point in results{
-                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-                    allLocations.append(location)
-                }
-            }
-            do {
-              // Make the GeoJSON source
-              var source = GeoJSONSource()
-                source.data = .feature(Feature(geometry: .lineString(LineString(allLocations))))
-                try self.mapView.mapboxMap.style.addSource(source, id: "SOURCE_ID")
-              var heatLayer = HeatmapLayer(id: "LAYER_ID")
-                heatLayer.source = "SOURCE_ID"
-
-              // Add the layer to the mapView
-                try self.mapView.mapboxMap.style.addLayer(heatLayer)
-                if !allLocations.isEmpty {
-                    self.mapView.mapboxMap.setCamera(
-                        to: CameraOptions(
-                            center: LocationFetcher.sharedinstance.lastKnownLocation,
-                            zoom: 10.0
-                        )
-                    )
-                }
-                
-            } catch {
-              print("error adding source or layer: \(error)")
-            }
-        })
         
+//        var allLocations = [CLLocationCoordinate2D]()
+//        // get firebase points
+//        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
+//            if let results = results as? [mapPoint]{
+//                for point in results{
+//                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+//                    allLocations.append(location)
+//                }
+//            }
+//            do {
+//              // Make the GeoJSON source
+//              var source = GeoJSONSource()
+//                source.data = .feature(Feature(geometry: .lineString(LineString(allLocations))))
+//                try self.mapView.mapboxMap.style.addSource(source, id: "SOURCE_ID")
+////              var heatLayer = HeatmapLayer(id: "LAYER_ID")
+////                heatLayer.source = "SOURCE_ID"
+//
+//              // Add the layer to the mapView
+////                try self.mapView.mapboxMap.style.addLayer(heatLayer)
+//                if !allLocations.isEmpty {
+//                    self.mapView.mapboxMap.setCamera(
+//                        to: CameraOptions(
+//                            center: LocationFetcher.sharedinstance.lastKnownLocation,
+//                            zoom: 10.0
+//                        )
+//                    )
+//                }
+//
+//            } catch {
+//              print("error adding source or layer: \(error)")
+//            }
+//        })
+        
+        MapboxMap.initialiceMap(mapView: mapView)
+        mapView.location.options.puckType = .puck2D()
+       
         
     }
     
