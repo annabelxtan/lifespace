@@ -8,7 +8,8 @@
 import UIKit
 import Firebase
 import ResearchKit
-import OneSignal
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // (1) initialize Firebase SDK
         FirebaseApp.configure()
+        configureNotifications()
         
         // (2) check if this is the first time
         // that the app runs!
@@ -40,35 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         
-        // OneSignal initialization
-          OneSignal.initWithLaunchOptions(launchOptions)
-          OneSignal.setAppId("81ed674d-365f-47db-986c-ad6d40b977de")
-          
-          // promptForPushNotifications will show the native iOS notification permission prompt.
-          // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
-          OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
-          })
-        
-        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
-            LaunchModel.sharedinstance.showSurveyAfterPasscode = true
-            // This block gets called when the user reacts to a notification received
-//            let notification: OSNotification = result.notification
-//                    
-//            if let additionalData = notification.additionalData {
-//                print("additionalData: ", additionalData)
-//                
-//                if let aditionalData = additionalData as? [String:Any]{
-//                    if let survey = aditionalData["surveyId"] as? String{
-//                        LaunchModel.sharedinstance.surveyId = survey
-//                        
-//                    }
-//                }
-//            }
-        }
-        
-        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
-        
         return true
     }
     
@@ -88,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // Extensions add new functionality to an existing class, structure, enumeration, or protocol type.
 // https://docs.swift.org/swift-book/LanguageGuide/Extensions.html
-extension AppDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
     /**
      The first time that our app runs we have to make sure that :
@@ -107,6 +80,47 @@ extension AppDelegate {
             UserDefaults.standard.set(true, forKey: Constants.prefFirstRunWasMarked)
         }
     }
+    
+    fileprivate func configureNotifications(){
+        if !UserDefaults.standard.bool(forKey: Constants.prefsNotificationsSchedule) {
+            let center = UNUserNotificationCenter.current()
+                center.delegate = self
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Jackson Heart"
+            content.body = "Please Complete Daily Survey"
+            // Configure the recurring date.
+            var dateComponents = DateComponents()
+            dateComponents.calendar = Calendar.current
+
+            dateComponents.hour = 19   // 19:00 hours
+            dateComponents.minute = 00
+
+            // Create the trigger as a repeating event.
+            let trigger = UNCalendarNotificationTrigger(
+                     dateMatching: dateComponents, repeats: true)
+
+            // Create the request
+            let uuidString = UUID().uuidString
+            let request = UNNotificationRequest(identifier: uuidString,
+                        content: content, trigger: trigger)
+
+            // Schedule the request with the system.
+            center.add(request) { (error) in }
+            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                if granted {
+                    UserDefaults.standard.set(true, forKey: Constants.prefsNotificationsSchedule)
+                }
+            }
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        LaunchModel.sharedinstance.showSurveyAfterPasscode = true
+        // you must call the completion handler when you're done
+        completionHandler()
+    }
+    
     
 }
 
