@@ -11,13 +11,14 @@ import Foundation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     var statusDidChange: ((Bool) -> Void)? = nil
+    var locationsWereUpdated: (([CLLocationCoordinate2D])-> Void)? = nil
+    var allLocations = [CLLocationCoordinate2D]()
     
     static let sharedinstance = LocationFetcher()
     
     let manager = CLLocationManager()
     let date = NSDate()
     let unixtime = NSTimeIntervalSince1970
-//    let authCollection = CKStudyUser.shared.authCollection
     var lastLatitude:CLLocationDegrees = 0.0
     var lastLongitude:CLLocationDegrees = 0.0
     var lastDate = Date()
@@ -27,13 +28,10 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
     
-    
     @Published var authorizationStatus:CLAuthorizationStatus = CLLocationManager().authorizationStatus
     @Published var canShowRequestMessage:Bool = true
-    
     @Published var lastKnownLocation: CLLocationCoordinate2D? {
         didSet {
-                
             guard let longitude = lastKnownLocation?.longitude else {
                 return
             }
@@ -52,11 +50,6 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
                 let c = 2 * atan2(sqrt(a), sqrt(1-a));
                 d = 6367 * c;
             }
-//            else{
-//                lastLatitude = latitude
-//                lastLongitude = longitude
-//            }
-            
             
             if d>0.1  || lastDate.startOfDay != Date().startOfDay{
                 lastDate = Date()
@@ -81,20 +74,25 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
                 lastLatitude = latitude
                 lastLongitude = longitude
                 
+                allLocations.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                locationsWereUpdated?(allLocations)
             }
-            
-            
         }
     }
 
     override init() {
         super.init()
+        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
+            if let results = results as? [CLLocationCoordinate2D]{
+                self.allLocations = results
+                self.locationsWereUpdated?(self.allLocations)
+            }
+        })
         lastDate = lastDate.addingTimeInterval(-10)
         manager.delegate = self
-        //self.manager.startUpdatingLocation()
-        //self.manager.startMonitoringSignificantLocationChanges()
         self.manager.allowsBackgroundLocationUpdates = true
         calculeIfCanShowRequestMessage()
+        
     }
     
     func calculeIfCanShowRequestMessage(){
@@ -116,23 +114,12 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     }
     
     func validateAuthorizationLocation() -> Bool{
-        
         switch (manager.authorizationStatus) {
-            case .authorizedAlways:
-                // Handle case
-                print("Always")
-                return true
-            case .authorizedWhenInUse:
-                // Handle case
-                print("When in use")
+            case .authorizedAlways,.authorizedWhenInUse:
                 return true
             case .denied, .restricted, .notDetermined:
-                // Handle case
-                print("Denied")
-
                 return false
         }
-        
     }
     
     func userAuthorizeAlways() -> Bool {
@@ -145,7 +132,6 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     
     func messageWhenValidateAuthorizationLocationFail(){
-        
         // initialise a pop up for using later
         let alertController = UIAlertController(title: "You have selected the wrong permit", message: "Please go to the localization settings and select ALWAYS", preferredStyle: .alert)
 
@@ -163,25 +149,12 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
         alertController.addAction(cancelAction)
         alertController.addAction(settingsAction)
         
-         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: false) {
-         
-             //self.start()
-             //LaunchModel.sharedinstance.showPermissionView = true
-             
-         }
+         UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: false) {  }
     }
 
     func requestAuthorizationLocation() {
-//        messageWhenValidateAuthorizationLocationFail()
-//        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .denied{
-//            messageWhenValidateAuthorizationLocationFail()
-//        }
-//        else if manager.authorizationStatus == .notDetermined{
-            manager.requestWhenInUseAuthorization()
-            manager.requestAlwaysAuthorization()
-//        }
-        
-        
+        manager.requestWhenInUseAuthorization()
+        manager.requestAlwaysAuthorization()
     }
     
     func stop(){
@@ -210,10 +183,6 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate, ObservableObject {
             LaunchModel.sharedinstance.showPermissionView = false
             start()
         }
-        
         calculeIfCanShowRequestMessage()
-        
     }
 }
-
-
