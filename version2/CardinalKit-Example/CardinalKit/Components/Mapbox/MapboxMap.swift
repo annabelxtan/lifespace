@@ -10,16 +10,13 @@ import Foundation
 import MapboxMaps
 
 class MapboxMap {
-    public static func initialiceMap(mapView: MapView){
-        var allLocations = [CLLocationCoordinate2D]()
-        // get firebase points
-        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
-            if let results = results as? [mapPoint]{
-                for point in results{
-                    let location = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-                    allLocations.append(location)
-                }
-            }
+    public static func initialiceMap(mapView: MapView, reload: Bool){
+        
+        
+        mapView.mapboxMap.onNext(.mapLoaded) { _ in
+            print("map is charged?")
+            var allLocations = [CLLocationCoordinate2D]()
+            allLocations = LocationFetcher.sharedinstance.allLocations
             do {
               // Make the GeoJSON source
                 var source = GeoJSONSource()
@@ -37,11 +34,19 @@ class MapboxMap {
                         zoom: 14.0
                     )
                 )
-
-
+                if reload{
+                    LocationFetcher.sharedinstance.locationsWereUpdated = { locations in
+                        do{
+                            try mapView.mapboxMap.style.updateGeoJSONSource(withId: "SOURCE_ID", geoJSON: .feature(Feature(geometry: .lineString(LineString(locations)))))
+                        }
+                        catch{
+                            print("error updating points")
+                        }
+                    }
+                }
             } catch {
               print("error adding source or layer: \(error)")
             }
-        })
+        }
     }
 }
