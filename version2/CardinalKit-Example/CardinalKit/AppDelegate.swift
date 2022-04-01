@@ -82,15 +82,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     fileprivate func configureNotifications(){
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         if !UserDefaults.standard.bool(forKey: Constants.prefsNotificationsSchedule) {
-            let center = UNUserNotificationCenter.current()
-                center.delegate = self
             center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
                 if granted {
                     UserDefaults.standard.set(true, forKey: Constants.prefsNotificationsSchedule)
-                    let center = UNUserNotificationCenter.current()
-                        center.delegate = self
-                    
                     let content = UNMutableNotificationContent()
                     content.title = "Jackson Heart"
                     content.body = "Please Complete Daily Survey"
@@ -98,8 +95,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     var dateComponents = DateComponents()
                     dateComponents.calendar = Calendar.current
 
-                    dateComponents.hour = 09  // 19:00 hours
-                    dateComponents.minute = 15
+                    dateComponents.hour = 19  // 19:00 hours
+                    dateComponents.minute = 00
 
                     // Create the trigger as a repeating event.
                     let trigger = UNCalendarNotificationTrigger(
