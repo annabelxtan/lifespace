@@ -31,17 +31,17 @@ class ScheduleViewController: OCKDailyPageViewController {
             case .success(let tasks):
 
                 // Add a non-CareKit view into the list
-                let tipTitle = "Customize your app!"
-                let tipText = "Start with the CKConfiguration.plist file."
+//                let tipTitle = "Customize your app!"
+//                let tipText = "Start with the CKConfiguration.plist file."
 
-                // Only show the tip view on the current date
-                if Calendar.current.isDate(date, inSameDayAs: Date()) {
-                    let tipView = TipView()
-                    tipView.headerView.titleLabel.text = tipTitle
-                    tipView.headerView.detailLabel.text = tipText
-                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
-                    listViewController.appendView(tipView, animated: false)
-                }
+//                // Only show the tip view on the current date
+//                if Calendar.current.isDate(date, inSameDayAs: Date()) {
+//                    let tipView = TipView()
+//                    tipView.headerView.titleLabel.text = tipTitle
+//                    tipView.headerView.detailLabel.text = tipText
+//                    tipView.imageView.image = UIImage(named: "GraphicOperatingSystem")
+//                    listViewController.appendView(tipView, animated: false)
+//                }
 
                 if #available(iOS 14, *), let walkTask = tasks.first(where: { $0.id == "steps" }) {
 
