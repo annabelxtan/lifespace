@@ -11,8 +11,6 @@ import Foundation
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
-    let date = NSDate()
-    let unixtime = NSTimeIntervalSince1970
     let authCollection = CKStudyUser.shared.authCollection
     
     var lastKnownLocation: CLLocationCoordinate2D? {
@@ -42,8 +40,8 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
                 db.collection(authCollection + "location-data")
                     .document(UUID().uuidString)
                     .setData([
-                                "currentdate": date,
-                                "epoch time (seconds)": unixtime,
+                                "currentdate": NSDate(),
+                                "time": NSDate().timeIntervalSince1970,
                                 "latitude": latitude,
                                 "longitude": longitude
                     ]) { err in

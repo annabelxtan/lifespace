@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>679196320947-nv1el320pl8a5ske9h6ec6np2a6hatk9.apps.googleusercontent.com</string>
+	<string>747429109194-3404r06uea662b66iledsv1v3na0b5ae.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.679196320947-nv1el320pl8a5ske9h6ec6np2a6hatk9</string>
+	<string>com.googleusercontent.apps.747429109194-3404r06uea662b66iledsv1v3na0b5ae</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB6hVc1piym0Y3ZXiVFJP7JT1utHuBOXR4</string>
+	<string>AIzaSyDfGV3sxQsXgasOatcrAcg8osSkD5-PQrs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>679196320947</string>
+	<string>747429109194</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.odden.jhsapp</string>
 	<key>PROJECT_ID</key>
-	<string>jackson-heart</string>
+	<string>som-rit-phi-mhealth2-qa</string>
 	<key>STORAGE_BUCKET</key>
-	<string>jackson-heart.appspot.com</string>
+	<string>som-rit-phi-mhealth2-qa.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:679196320947:ios:3ab0b46c6abe48698dbcc6</string>
-	<key>DATABASE_URL</key>
-	<string>https://jackson-heart-default-rtdb.firebaseio.com</string>
+	<string>1:747429109194:ios:5cb13928c04d4ebf524333</string>
 </dict>
 </plist>
