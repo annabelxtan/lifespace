@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>747429109194-3404r06uea662b66iledsv1v3na0b5ae.apps.googleusercontent.com</string>
+	<string>730559611242-ofo0cc94tvapj5qb2mdh08c575jcnetn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.747429109194-3404r06uea662b66iledsv1v3na0b5ae</string>
+	<string>com.googleusercontent.apps.730559611242-ofo0cc94tvapj5qb2mdh08c575jcnetn</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDfGV3sxQsXgasOatcrAcg8osSkD5-PQrs</string>
+	<string>AIzaSyAPwwt4YKMTAgwGtDKen0vMe1jSGWtbTMU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>747429109194</string>
+	<string>730559611242</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.odden.jhsapp</string>
+	<string>com.odden.lifespace-dev</string>
 	<key>PROJECT_ID</key>
-	<string>som-rit-phi-mhealth2-qa</string>
+	<string>lifespace-95f52</string>
 	<key>STORAGE_BUCKET</key>
-	<string>som-rit-phi-mhealth2-qa.appspot.com</string>
+	<string>lifespace-95f52.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:747429109194:ios:5cb13928c04d4ebf524333</string>
+	<string>1:730559611242:ios:f22cd899ccefb0534ca513</string>
 </dict>
 </plist>
