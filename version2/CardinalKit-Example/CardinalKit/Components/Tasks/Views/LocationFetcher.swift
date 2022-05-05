@@ -29,7 +29,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
                 if let mapPointsCollection = CKStudyUser.shared.mapPointsCollection {
                     let settings = FirestoreSettings()
                     settings.isPersistenceEnabled = false
-                    
+
                     let db = Firestore.firestore()
                     
                     db.settings = settings
@@ -57,6 +57,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         self.manager.startMonitoringSignificantLocationChanges()
+        self.manager.startUpdatingLocation()
     }
     
     func start() {
@@ -64,6 +65,7 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate {
         manager.requestAlwaysAuthorization()
         if CLLocationManager.locationServicesEnabled(){
             self.manager.startMonitoringSignificantLocationChanges()
+            self.manager.startUpdatingLocation()
         }
     }
     
