@@ -48,6 +48,7 @@ extension SceneDelegate: ORKPasscodeDelegate {
     */
     func CKLockDidEnterBackground() {
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
+            LaunchModel.sharedinstance.showSurvey = false
             toggleContainer(hidden: true)
         }
     }

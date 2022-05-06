@@ -30,6 +30,8 @@ class MapManagerView: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        pointsFetcher.fetchAllTodaypoints()
+        
         mapView = MapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(mapView)
