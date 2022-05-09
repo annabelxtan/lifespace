@@ -25,7 +25,7 @@ struct MainUIView: View {
         TabView {
             MapManagerViewWrapper()
                 .tabItem{
-                    Image("tab_profile")
+                    Image("house")
                         .renderingMode(.template)
                     Text("Home")
                 }
