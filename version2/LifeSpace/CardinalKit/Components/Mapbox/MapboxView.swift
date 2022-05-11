@@ -88,9 +88,17 @@ class MapManagerView: UIViewController {
     
     @objc
     func startSurvey(){
-        let surveyUIView = AnyView(CKTaskViewController(tasks: DailySurveyTask(showInstructions: false)))
-        let hostingController = UIHostingController(rootView: surveyUIView)
-        present(hostingController, animated: true, completion: nil)
+        // Only show survey if it is later than 7pm in the user's local time zone
+        let hour = Calendar.current.component(.hour, from: Date())
+        if(hour >= 19){
+            let surveyUIView = CKTaskViewController(tasks: DailySurveyTask(showInstructions: false))
+            let hostingController = UIHostingController(rootView: surveyUIView)
+            present(hostingController, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Survey Not Available", message:"Please come back after 7pm to take your survey!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
 }
