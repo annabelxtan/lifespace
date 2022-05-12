@@ -23,6 +23,11 @@ jobs:
       run: |
           xcodebuild -version
           swift --version
+    - uses: extractions/netrc@v1
+      with:
+        machine: api.mapbox.com
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
     - name: Install Dependencies
       run: pod install
     - name: Build
