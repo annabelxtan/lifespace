@@ -44,10 +44,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                 consentDocument.makePDF { (data, error) -> Void in
                     
                     let config = CKPropertyReader(file: "CKConfiguration")
+                    let consentFileName = config.read(query: "Consent File Name")
                         
                     var docURL = (FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)).last as NSURL?
-                    docURL = docURL?.appendingPathComponent("\(config.read(query: "Consent File Name")).pdf") as NSURL?
-                    
+                    docURL = docURL?.appendingPathComponent("\(consentFileName).pdf") as NSURL?
 
                     do {
                         let url = docURL! as URL
@@ -59,19 +59,9 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         let storageRef = storage.reference()
                         
                         if let DocumentCollection = CKStudyUser.shared.authCollection {
-                            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
+                            let DocumentRef = storageRef.child("\(DocumentCollection)/\(consentFileName).pdf")
                             
                             DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
-                                guard let metadata = metadata else {
-                                    return
-                                }
-                                
-                                DocumentRef.downloadURL { (url, error) in
-                                    guard let downloadURL = url else {
-                                        return
-                                    }
-                                }
-                                
                                 if let error = error {
                                     print(error.localizedDescription)
                                 }
@@ -79,12 +69,10 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         }
 
                     } catch let error {
-
                         print(error.localizedDescription)
                     }
                 }
             }
-            
             
             print("Login successful! task: \(taskViewController.task?.identifier ?? "(no ID)")")
             
