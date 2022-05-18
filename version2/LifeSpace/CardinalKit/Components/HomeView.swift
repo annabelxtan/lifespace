@@ -30,7 +30,7 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                Button("Take Daily Survey after 7 PM"){
+                Button("Take Daily Survey"){
                     if(surveyActive){
                         self.showingSurvey.toggle()
                     } else {
@@ -42,7 +42,6 @@ struct HomeView: View {
                 .foregroundColor(.white)
                 .background(Color("primaryRed"))
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-                .opacity(surveyActive ? 1 : 0.5)
                 .padding(5)
                 .alert(isPresented: $showingSurveyAlert){
                     Alert(title: Text("Survey Not Available"), message: Text("Please come back after 7:00 PM to complete your daily survey!"), dismissButton: .default(Text("OK")))

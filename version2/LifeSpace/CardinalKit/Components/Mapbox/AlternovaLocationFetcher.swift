@@ -70,7 +70,7 @@ class AlternovaLocationFetcher: NSObject, ObservableObject {
     }
     
     func fetchAllTodaypoints(){
-        JHMapDataManager.shared.getAllMapPoints(onCompletion: {(results) in
+        JHMapDataManager.shared.getAllMapPoints(date: Date(), onCompletion: {(results) in
             if let results = results as? [CLLocationCoordinate2D]{
                 self.allLocations = results
                 self.onLocationsUpdated?(self.allLocations)
