@@ -31,17 +31,17 @@ struct PermissionLocationUIView: View {
                 .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
             Text("To participate in the study, please allow LifeSpace to access your location.")
-                .multilineTextAlignment(.leading)
+                .multilineTextAlignment(.center)
                 .font(.title)
-                .padding()
+                .padding(10)
             
             if locationFetcher.canShowRequestMessage {
                 if locationFetcher.authorizationStatus == .authorizedWhenInUse{
 
                     Text("Please tap the button below and select \"Change to Always Allow\" on the window that pops up.")
-                        .multilineTextAlignment(.leading)
-                        .font(.headline)
-                        .padding()
+                        .multilineTextAlignment(.center)
+                        .font(.title2)
+                        .padding(10)
                     
                     HStack {
                         
@@ -73,9 +73,9 @@ struct PermissionLocationUIView: View {
                 }
                 else{
                     Text("Please tap the button below and select \"Allow While Using App\" on the window that pops up.")
-                        .multilineTextAlignment(.leading)
-                        .font(.headline)
-                        .padding()
+                        .multilineTextAlignment(.center)
+                        .font(.title2)
+                        .padding(10)
                     
                     HStack {
                         Spacer()
@@ -105,8 +105,8 @@ struct PermissionLocationUIView: View {
             else{
                 Text("Please go to location settings and select \"ALWAYS\".")
                     .multilineTextAlignment(.leading)
-                    .font(.headline)
-                    .padding()
+                    .font(.title2)
+                    .padding(10)
                 HStack {
                     Spacer()
                     Button(action: {
