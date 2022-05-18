@@ -13,6 +13,14 @@ struct HomeView: View {
     @State private var showingSurveyAlert = false
     @State private var showingSurvey = false
     @State private var trackingOn = true
+    @State private var date = Date()
+    
+    let dateRange: ClosedRange<Date> = {
+        let calendar = Calendar.current
+        let startComponents = DateComponents(year: 2022, month: 5, day: 1)
+        let endComponents = DateComponents(year: 2022, month: 5, day: 18)
+        return calendar.date(from:startComponents)! ... calendar.date(from:endComponents)!
+    }()
     
     var surveyActive: Bool {
         // if it's after 7pm today in the user's local time, the survey is active
@@ -27,6 +35,16 @@ struct HomeView: View {
             
             //overlay buttons on map
             VStack {
+                
+                HStack {
+                    Spacer()
+                    DatePicker(
+                        "",
+                        selection: $date,
+                        in: dateRange,
+                        displayedComponents: [.date]
+                    ).padding()
+                }
                 
                 Spacer()
                 

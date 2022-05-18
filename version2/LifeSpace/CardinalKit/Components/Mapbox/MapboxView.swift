@@ -12,17 +12,19 @@ import MapboxMaps
 struct MapManagerViewWrapper: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = MapManagerView
+    var date: Date = Date()
     
     func makeUIViewController(context: Context) -> MapManagerView {
         return MapManagerView()
     }
     
     func updateUIViewController(_ uiViewController: MapManagerView, context: Context) {
-        
+        uiViewController.date = date
     }
 }
 
 class MapManagerView: UIViewController {
+    var date: Date = Date()
     internal var mapView: MapView!
     var trackingButton:UIButton?=nil
     let pointsFetcher = AlternovaLocationFetcher.shared
