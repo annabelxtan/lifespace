@@ -13,6 +13,9 @@ import CardinalKit
 class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        let storage = Storage.storage()
+        
         switch reason {
         case .completed:
             // if we completed the onboarding task view controller, go to study.
@@ -52,6 +55,28 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                         
                         UserDefaults.standard.set(url.path, forKey: "consentFormURL")
                         print(url.path)
+                        
+                        let storageRef = storage.reference()
+                        
+                        if let DocumentCollection = CKStudyUser.shared.authCollection {
+                            let DocumentRef = storageRef.child("\(DocumentCollection)/Consent.pdf")
+                            
+                            DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
+                                guard let metadata = metadata else {
+                                    return
+                                }
+                                
+                                DocumentRef.downloadURL { (url, error) in
+                                    guard let downloadURL = url else {
+                                        return
+                                    }
+                                }
+                                
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
 
                     } catch let error {
 
