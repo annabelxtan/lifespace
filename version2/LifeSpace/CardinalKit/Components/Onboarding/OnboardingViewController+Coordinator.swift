@@ -64,6 +64,8 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
                             DocumentRef.putFile(from: url, metadata: nil) { metadata, error in
                                 if let error = error {
                                     print(error.localizedDescription)
+                                } else {
+                                    print("Consent form uploaded successfully!")
                                 }
                             }
                         }
