@@ -103,8 +103,8 @@ struct PermissionLocationUIView: View {
                 
             }
             else{
-                Text("Please go to location settings and select \"ALWAYS\".")
-                    .multilineTextAlignment(.leading)
+                Text("Please go to location settings and select \"Always\".")
+                    .multilineTextAlignment(.center)
                     .font(.title2)
                     .padding(10)
                 HStack {
