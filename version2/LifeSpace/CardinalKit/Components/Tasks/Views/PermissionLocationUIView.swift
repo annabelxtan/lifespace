@@ -24,7 +24,7 @@ struct PermissionLocationUIView: View {
     var body: some View {
         
         VStack(spacing: 10) {
-            Image("CKLogo")
+            Image("LifeSpace")
                 .resizable()
                 .scaledToFit()
                 .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
@@ -151,11 +151,11 @@ struct PermissionLocationUIView: View {
 //            }
             Spacer()
             
-            Image("SBDLogoGrey")
-                .resizable()
-                .scaledToFit()
-                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
-                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
+//            Image("SBDLogoGrey")
+//                .resizable()
+//                .scaledToFit()
+//                .padding(.leading, Metrics.PADDING_HORIZONTAL_MAIN*4)
+//                .padding(.trailing, Metrics.PADDING_HORIZONTAL_MAIN*4)
             
         }
     }
