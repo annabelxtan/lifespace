@@ -119,6 +119,7 @@ class AlternovaLocationFetcher: NSObject, ObservableObject {
         if(tracking){
             self.tracking = false
             locationFetcher.manager.stopUpdatingLocation()
+            print("Stopping location tracking...")
         }
         else{
             if CLLocationManager.locationServicesEnabled(){
@@ -126,6 +127,7 @@ class AlternovaLocationFetcher: NSObject, ObservableObject {
                 locationFetcher.manager.startUpdatingLocation()
                 locationFetcher.manager.startMonitoringSignificantLocationChanges()
                 locationFetcher.manager.allowsBackgroundLocationUpdates = true
+                print("Starting location tracking...")
             }
         }
     }
