@@ -97,9 +97,7 @@ The duration of this study will be two weeks (14 days). At the end of the data c
 
 Risks: The primary risk is a potential loss of privacy, but we have taken all measures to minimize this risk. If for any reason you do not wish to have your location recorded temporarily, click ‘Stop’ and the location will stop recording until you start it again. Your data are stored securely, and your name and Apple ID will be removed from your data when it is downloaded.
 
-
-Benefits: We cannot guarantee any benefits to you in this study apart from a deeper understanding of how you have spent your time during the day. We also hope that you will have a sense of satisfaction in participating in an epidemiological study.
-</string>
+Benefits: We cannot guarantee any benefits to you in this study apart from a deeper understanding of how you have spent your time during the day. We also hope that you will have a sense of satisfaction in participating in an epidemiological study.</string>
 			<key>Content</key>
 			<string>We will collect the coordinates of your location throughout the day along with the time that you were in that location. We will also collect your name and Apple ID. 
 &lt;br /&gt;&lt;br /&gt;
@@ -127,11 +125,9 @@ Benefits: We cannot guarantee any benefits to you in this study apart from a dee
 			<key>FormalTitle</key>
 			<string>Data Use</string>
 			<key>Summary</key>
-			<string>Your name will be shared with the REGARDS coordinating center so that they know you are participating in this ancillary study. Your data will be used for research within the Odden lab at Stanford University. Your data will be deidentified and returned to the REGARDS coordinating Center for linkage with other data collected as part of REGARDS.
-</string>
+			<string>Your name will be shared with the REGARDS coordinating center so that they know you are participating in this ancillary study. Your data will be used for research within the Odden lab at Stanford University. Your data will be deidentified and returned to the REGARDS coordinating center for linkage with other data collected as part of REGARDS.</string>
 			<key>Content</key>
-			<string>Your name will be shared with the REGARDS coordinating center so that they know you are participating in this ancillary study. Your data will be used for research within the Odden lab at Stanford University. Your data will be deidentified and returned to the REGARDS coordinating Center for linkage with other data collected as part of REGARDS.
-</string>
+			<string>Your name will be shared with the REGARDS coordinating center so that they know you are participating in this ancillary study. Your data will be used for research within the Odden lab at Stanford University. Your data will be deidentified and returned to the REGARDS coordinating center for linkage with other data collected as part of REGARDS.</string>
 		</dict>
 		<key>TimeCommitment</key>
 		<dict>
