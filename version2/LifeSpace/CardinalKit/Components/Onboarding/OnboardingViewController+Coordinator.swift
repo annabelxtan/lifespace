@@ -16,10 +16,9 @@ class OnboardingViewCoordinator: NSObject, ORKTaskViewControllerDelegate {
         
         // Check if study ID is valid and show an alert if it is not
         if let studyIDResult = taskViewController.result.stepResult(forStepIdentifier: "StudyIDEntryStep")?.results,
-           let studyID = studyIDResult[0] as? ORKTextQuestionResult {
-            if studyID.textAnswer == "1234" {
-                return true
-            } else {
+           let studyID = studyIDResult[0] as? ORKTextQuestionResult,
+           let id = studyID.textAnswer {
+            if !Constants.validStudyIDs.contains(id) {
                 let alert = UIAlertController(title: nil, message: "The ID entered is invalid, please try again", preferredStyle: .alert)
                 let confirmAction = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(confirmAction)
