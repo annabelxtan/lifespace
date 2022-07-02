@@ -21,7 +21,7 @@
 		2BF6452026C1DBE70020C206 /* CK_ORKSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF6451F26C1DBE70020C206 /* CK_ORKSerialization.swift */; };
 		2F94C5F22536543600DF8866 /* SceneDelegate+CardinalKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */; };
 		4F02D979274871A200F203B5 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D978274871A200F203B5 /* LocationView.swift */; };
-		4F02D97B274871C300F203B5 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D97A274871C300F203B5 /* LocationFetcher.swift */; };
+		4F02D97B274871C300F203B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D97A274871C300F203B5 /* LocationService.swift */; };
 		4F02D97D274871C800F203B5 /* NotificationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D97C274871C800F203B5 /* NotificationFetcher.swift */; };
 		63A143DD280EDBA9001A54BC /* MapboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A143DC280EDBA9001A54BC /* MapboxView.swift */; };
 		63A143DF280F1AAD001A54BC /* DailySurveyStartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A143DE280F1AAC001A54BC /* DailySurveyStartButton.swift */; };
@@ -117,7 +117,7 @@
 		2F94C5F12536543600DF8866 /* SceneDelegate+CardinalKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SceneDelegate+CardinalKit.swift"; sourceTree = "<group>"; };
 		41DC264876E45FE5A3FD8701 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4F02D978274871A200F203B5 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		4F02D97A274871C300F203B5 /* LocationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		4F02D97A274871C300F203B5 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4F02D97C274871C800F203B5 /* NotificationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationFetcher.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* LifeSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62AA5CD1C2188D392530510F /* CardinalKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CardinalKit.podspec; path = ../CardinalKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -263,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				63A82399280DD26E001D49A8 /* MapBoxMap.swift */,
-				63A8239B280DD499001D49A8 /* AlternovaLocationFetcher.swift */,
 				63A143DC280EDBA9001A54BC /* MapboxView.swift */,
 			);
 			path = Mapbox;
@@ -304,7 +303,10 @@
 				8E0A4384244A4A0400656518 /* Constants.swift */,
 				8E0A4378244A4A0300656518 /* LifeSpace-Bridging-Header.h */,
 				8E0A43C9244A4C6500656518 /* Info.plist */,
+<<<<<<< HEAD
 				276B0252282355A600FF6CA7 /* GoogleService-Info.plist */,
+=======
+>>>>>>> upstream/main
 				E2F1FD7724D62064006C39DF /* CKConfiguration.plist */,
 			);
 			path = "Supporting Files";
@@ -388,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				4F02D97C274871C800F203B5 /* NotificationFetcher.swift */,
-				4F02D97A274871C300F203B5 /* LocationFetcher.swift */,
 				4F02D978274871A200F203B5 /* LocationView.swift */,
 				27B7891D284CE9260006C02F /* CloudTaskListItemView.swift */,
 				27653A12272A2E7700D74E83 /* LocalTaskListItemView.swift */,
@@ -427,6 +428,8 @@
 				27FCB9642834A828009B02CD /* HomeView.swift */,
 				E29143FB24E74AD100EE97B2 /* LaunchUIView.swift */,
 				63A143E0280F579E001A54BC /* PermissionLocationUIView.swift */,
+				4F02D97A274871C300F203B5 /* LocationService.swift */,
+				63A8239B280DD499001D49A8 /* AlternovaLocationFetcher.swift */,
 				8E0A4399244A4A0400656518 /* Onboarding */,
 				8E9CDEA525915F6600C8A228 /* Schedule */,
 				8E0A438D244A4A0400656518 /* Tasks */,
@@ -518,6 +521,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				8E0A43D0244A60D800656518 /* Embed Frameworks */,
 				2F033BEE924949896CCB5DCD /* [CP] Embed Pods Frameworks */,
+				275E587728656F3700799953 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -578,7 +582,10 @@
 			files = (
 				8E0A43AF244A4A0400656518 /* Assets.xcassets in Resources */,
 				8E0A43B0244A4A0400656518 /* LaunchScreen.storyboard in Resources */,
+<<<<<<< HEAD
 				276B0253282355A600FF6CA7 /* GoogleService-Info.plist in Resources */,
+=======
+>>>>>>> upstream/main
 				E2F1FD7824D62064006C39DF /* CKConfiguration.plist in Resources */,
 				8E0A43C1244A4A0400656518 /* LoginCustomWaitStepView.xib in Resources */,
 			);
@@ -587,6 +594,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		275E587728656F3700799953 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		2F033BEE924949896CCB5DCD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -732,7 +756,7 @@
 				8E7FFFB425DCE9B7002982B4 /* CKUploadToGCPTaskViewControllerDelegate.swift in Sources */,
 				8EBE6F9C24B3C0E60093D07C /* AppDelegate+CardinalKit.swift in Sources */,
 				8E0A43B9244A4A0400656518 /* AppDelegate.swift in Sources */,
-				4F02D97B274871C300F203B5 /* LocationFetcher.swift in Sources */,
+				4F02D97B274871C300F203B5 /* LocationService.swift in Sources */,
 				8E6E1E3225353ABE0024B8DF /* ProfileUIView.swift in Sources */,
 				63A8239C280DD499001D49A8 /* AlternovaLocationFetcher.swift in Sources */,
 				8E6E1E1E253528F50024B8DF /* SupportView.swift in Sources */,
