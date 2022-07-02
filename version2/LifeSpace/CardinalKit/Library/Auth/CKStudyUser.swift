@@ -25,11 +25,6 @@ class CKStudyUser {
     /* **************************************************************
      * store your Firebase objects under this path in order to
      * be compatible with CardinalKit GCP rules.
-<<<<<<< HEAD
-    **************************************************************/
-    let baseCollection = "/com.odden.lifespace"
-    
-=======
      **************************************************************/
     fileprivate let prefix = "ls"
 
@@ -47,7 +42,6 @@ class CKStudyUser {
         return nil
     }
 
->>>>>>> upstream/main
     var authCollection: String? {
         if let userId = currentUser?.uid,
            let root = rootAuthCollection {
