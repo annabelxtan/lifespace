@@ -9,18 +9,14 @@ import Foundation
 import Firebase
 import CardinalKit
 
-class CKStudyUser {
+class CKStudyUser: ObservableObject {
 
     static let shared = CKStudyUser()
     
     /* **************************************************************
      * the current user only resolves if we are logged in
      **************************************************************/
-    var currentUser: User? {
-        // this is a reference to the
-        // Firebase + Google Identity User
-        return Auth.auth().currentUser
-    }
+    @Published var currentUser: User?
 
     /* **************************************************************
      * store your Firebase objects under this path in order to
@@ -150,8 +146,42 @@ class CKStudyUser {
                 "userID": uid,
                 "studyID": studyID ?? "",
                 "lastActive": Date().ISOStringFromDate(),
-                "email": email]
+                "email": email],
+                merge: true
             )
+        }
+    }
+
+    /**
+        Updates the last completed survey date in the user document with
+        the current date, stored as an ISO 8601 formatted string
+     */
+    func updateLastSurveyDate() {
+        let today = Date().ISOStringFromDate()
+
+        // Update locally
+        UserDefaults.standard.setValue(today, forKey: Constants.lastSurveyDate)
+
+        // Update in database
+        if let dataBucket = rootAuthCollection,
+           let uid = currentUser?.uid {
+            let db = Firestore.firestore()
+            db.collection(dataBucket).document(uid).updateData([
+                "lastSurveyDate": today])
+        }
+    }
+
+    func getLastSurveyDate() async throws {
+        // Get the date of the last completed survey from the user document in Firestore
+        // then store the result locally
+        
+        if let dataBucket = rootAuthCollection,
+           let uid = currentUser?.uid {
+
+            let db = Firestore.firestore()
+            let document = try await db.collection(dataBucket).document(uid).getDocument()
+            let lastSurveyDateString = document.get("lastSurveyDate") as? String
+            UserDefaults.standard.setValue(lastSurveyDateString, forKey: Constants.lastSurveyDate)
         }
     }
 

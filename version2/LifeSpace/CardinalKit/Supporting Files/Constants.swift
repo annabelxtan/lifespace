@@ -32,6 +32,6 @@ class Constants {
     
     static let JHFirstLocationRequest = "JHFirstLocationRequest"
     
-    static let validStudyIDs = ["1234", "1235", "1236"]
-    
+    static let lastSurveyDate = "LAST_SURVEY_DATE"
+    static let hourToOpenSurvey = 19 // Hour to open survey daily in military time
 }
